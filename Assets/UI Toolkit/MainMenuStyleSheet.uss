@@ -1,0 +1,40 @@
+.header {
+    align-self: center;
+    align-items: stretch;
+    -unity-font: url("project://database/Assets/Fonts/double-feature/DoubleFeature20.ttf?fileID=12800000&guid=fc46f950c3d454b4d868aad32411dbe4&type=3#DoubleFeature20");
+    font-size: 74px;
+    transition-property: all, ignored;
+    transition-duration: 0s, 0s;
+    transition-timing-function: ease, ease;
+    transition-delay: 0s, 0s;
+    -unity-font-definition: initial;
+    color: rgb(0, 0, 0);
+}
+
+.button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    -unity-font: url("project://database/Assets/Fonts/double-feature/DoubleFeature20.ttf?fileID=12800000&guid=fc46f950c3d454b4d868aad32411dbe4&type=3#DoubleFeature20");
+    -unity-font-definition: initial;
+    color: rgb(23, 23, 103);
+}
+
+.button :hover {
+    border-top-width: 20px;
+    border-right-width: 20px;
+    border-bottom-width: 20px;
+    border-left-width: 20px;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 1px;
+    border-bottom-left-radius: 1px;
+    border-left-color: rgb(232, 209, 24);
+    border-right-color: rgb(232, 209, 24);
+    border-top-color: rgb(232, 209, 24);
+    border-bottom-color: rgb(232, 209, 24);
+    color: rgb(58, 132, 26);
+}
