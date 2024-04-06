@@ -3,8 +3,12 @@ using UnityEngine;
 public class BlobController : MonoBehaviour
 {
     public Vector2 destination; 
-    private readonly float moveSpeed = 2f;
+    private float moveSpeed;
 
+    private void Start()
+    {
+        moveSpeed = Random.Range(1f, 5f);
+    }
     private void Update()
     {
         MoveTowardsDestination();
@@ -13,9 +17,20 @@ public class BlobController : MonoBehaviour
     private void MoveTowardsDestination()
     {
         transform.position = Vector2.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, destination) < 0.1f)
+        if (Vector2.Distance(transform.position, destination) < 0.1f) ReturnToPool();
+    }
+
+    private void ReturnToPool()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            other.GetComponent<ColorComponent>();
+            ReturnToPool();
         }
     }
 }
