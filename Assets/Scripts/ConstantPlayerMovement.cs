@@ -20,8 +20,7 @@ public class ConstantPlayerMovement : MonoBehaviour
     {
         Vector2 moveInput = _playerActions.Player_Map.Movement.ReadValue<Vector2>();
         horizontalInput = moveInput.x;
-
-        //rb.velocity = transform.up * moveVelocity;
+        
         rb.AddForce(transform.up * moveVelocity);
         rb.angularVelocity = -horizontalInput * turnForce;
 
