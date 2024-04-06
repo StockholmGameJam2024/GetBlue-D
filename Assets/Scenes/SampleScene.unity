@@ -1966,7 +1966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players: []
   playerNumber: 4
-  playerPrefab: {fileID: 546613113761567633, guid: 385eeb065b514934b83a49fe94ec9550, type: 3}
+  playerPrefab: {fileID: 546613113761567633, guid: 8aa851ef0fc77b141bf24f36fa7e5f21, type: 3}
   spawnPositions:
   - {fileID: 625389091}
   - {fileID: 1224188146}
