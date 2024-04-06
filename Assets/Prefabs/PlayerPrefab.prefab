@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7815801005501569595}
   - component: {fileID: 546613113761567633}
   - component: {fileID: 5555637628632646502}
+  - component: {fileID: -4215852978380855968}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -130,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.09, y: 1.8}
+  m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
 --- !u!114 &546613113761567633
 MonoBehaviour:
@@ -145,7 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
-  currentColor: {r: 0, g: 0, b: 0, a: 0}
   targetColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!50 &5555637628632646502
 Rigidbody2D:
@@ -174,3 +174,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-4215852978380855968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3808509738649111106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2109afc4294e15d46b3addb26ac26090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTension: 0
+  inputAcceleration: 0
+  lineRenderer: {fileID: 0}
