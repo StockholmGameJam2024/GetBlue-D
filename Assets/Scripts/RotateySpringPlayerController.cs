@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class RotateySpringPlayerController : MonoBehaviour
 {
     [SerializeField]
     private float maxTension;
@@ -35,18 +31,53 @@ public class PlayerController : MonoBehaviour
         _playerActions.Disable();
     }
 
-    private double resolveAngle(Vector2 vector, out bool isLeft)
+    /**
+     * Right: 0
+     * Bottom: -1/2 PI
+     * Left: PI
+     * Top: 1/2 PI
+     */
+    private double vecToAngle(Vector2 vector)
     {
-        isLeft = vector.x < 0;
+        var isLeft = vector.x < 0;
         if (vector.x != 0)
         {
-            return Math.Atan(vector.y / Math.Abs(vector.x));
+            var angle = Math.Atan(vector.y / Math.Abs(vector.x));
+            return angle switch
+            {
+                > 0 when isLeft => angle + Math.PI / 2,
+                < 0 when isLeft => angle - Math.PI / 2,
+                _ => angle,
+            };
+
         }
         if (vector.y < 0)
         {
             return -Math.PI / 2;
         }
         return Math.PI / 2;
+    }
+    
+    private Vector2 angleToVec(double angle)
+    {
+        var isLeft = false;
+        if (Math.Abs(angle) > Math.PI / 2)
+        {
+            isLeft = true;
+            if (angle > 0)
+            {
+                angle -= Math.PI / 2;
+            }
+            else
+            {
+                angle += Math.PI / 2;
+            }
+        }
+        return new Vector2
+        {
+            x = (float)Math.Cos(angle) * (isLeft ? -1 : 1),
+            y = (float)Math.Sin(angle),
+        };
     }
 
     private void FixedUpdate()
@@ -57,7 +88,7 @@ public class PlayerController : MonoBehaviour
         inputMagnitude -= 0.5;
 
         // If the analog stick is not accelerating, then re-use the last angle
-        double inputAngle = resolveAngle(inputMagnitude < 0 ? _tension : _moveInput, out var isInputLeft);
+        double inputAngle = vecToAngle(inputMagnitude < 0 ? _tension : _moveInput);
         var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
         
         inputMagnitude *= inputAcceleration;
@@ -72,13 +103,8 @@ public class PlayerController : MonoBehaviour
             inputMagnitude *= 2;
         }
         currentMagnitude = Math.Max(currentMagnitude + inputMagnitude, 0);
-        
-        var newTension = new Vector2
-        {
-            x = (float)(Math.Cos(inputAngle) * currentMagnitude) * (isInputLeft ? -1 : 1),
-            y = (float)(Math.Sin(inputAngle) * currentMagnitude),
-        };
-        _tension = newTension;
+
+        _tension = angleToVec(inputAngle) * (float)currentMagnitude;
 
         var color = Color.red;
         color.a = 1f;
@@ -96,13 +122,9 @@ public class PlayerController : MonoBehaviour
     void OnSpring()
     {
         var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
-        var currentAngle = resolveAngle(_tension, out var isLeft);
+        var currentAngle = vecToAngle(_tension);
         var accelerationMagnitude = Math.Pow(currentMagnitude, 2) / 10; // The longer you hold down, the even bigger payoff. Exponential.
-        var acceleration = new Vector2
-        {
-            x = (float)(Math.Cos(currentAngle) * accelerationMagnitude) * (isLeft ? -1 : 1),
-            y = (float)(Math.Sin(currentAngle) * accelerationMagnitude),
-        };
+        var acceleration = angleToVec(currentAngle) * (float)accelerationMagnitude;
         
         _rbody.velocity += acceleration;
         _tension = new Vector2();
