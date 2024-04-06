@@ -73,3 +73,7 @@ crashlytics-build.properties
 
 # Added by VS2022
 .vsconfig
+
+# CI artifacts
+/[Aa]rtifacts/
+/[Cc]odeCoverage/
