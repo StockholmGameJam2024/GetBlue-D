@@ -127,7 +127,19 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Merry Christmas Xbox"",
+            ""bindingGroup"": ""Merry Christmas Xbox"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<XInputController>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Player_Map
         m_Player_Map = asset.FindActionMap("Player_Map", throwIfNotFound: true);
@@ -244,6 +256,15 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         }
     }
     public Player_MapActions @Player_Map => new Player_MapActions(this);
+    private int m_MerryChristmasXboxSchemeIndex = -1;
+    public InputControlScheme MerryChristmasXboxScheme
+    {
+        get
+        {
+            if (m_MerryChristmasXboxSchemeIndex == -1) m_MerryChristmasXboxSchemeIndex = asset.FindControlSchemeIndex("Merry Christmas Xbox");
+            return asset.controlSchemes[m_MerryChristmasXboxSchemeIndex];
+        }
+    }
     public interface IPlayer_MapActions
     {
         void OnMovement(InputAction.CallbackContext context);
