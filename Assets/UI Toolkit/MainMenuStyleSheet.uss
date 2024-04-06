@@ -1,40 +1,66 @@
 .header {
     align-self: center;
     align-items: stretch;
-    -unity-font: url("project://database/Assets/Fonts/double-feature/DoubleFeature20.ttf?fileID=12800000&guid=fc46f950c3d454b4d868aad32411dbe4&type=3#DoubleFeature20");
+    -unity-font: url("project://database/Assets/TextMesh%20Pro/Fonts/GoodDog%20Plain.ttf?fileID=12800000&guid=dc72703a377d244b39cf4bd75493532d&type=3#GoodDog Plain");
     font-size: 74px;
-    transition-property: all, ignored;
-    transition-duration: 0s, 0s;
-    transition-timing-function: ease, ease;
-    transition-delay: 0s, 0s;
     -unity-font-definition: initial;
-    color: rgb(0, 0, 0);
+    color: rgb(183, 154, 0);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    -unity-text-outline-color: rgb(0, 0, 0);
+    -unity-text-outline-width: 4px;
 }
 
 .button {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    -unity-font: url("project://database/Assets/Fonts/double-feature/DoubleFeature20.ttf?fileID=12800000&guid=fc46f950c3d454b4d868aad32411dbe4&type=3#DoubleFeature20");
+    -unity-font: url("project://database/Assets/TextMesh%20Pro/Fonts/GoodDog%20Plain.ttf?fileID=12800000&guid=dc72703a377d244b39cf4bd75493532d&type=3#GoodDog Plain");
     -unity-font-definition: initial;
-    color: rgb(23, 23, 103);
+    color: rgb(221, 221, 221);
+    transition-duration: 0.1s;
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    background-image: url("project://database/Assets/Sprites/Cool_Game_Buttons.jpg?fileID=1594424990&guid=1587ca8c4ab52d2429a659fd04ea0373&type=3#Cool_Game_Buttons_0");
+    -unity-background-scale-mode: stretch-to-fill;
+    font-size: 108px;
+    letter-spacing: 0;
+    word-spacing: 0;
+    padding-top: 34px;
+    padding-right: 34px;
+    padding-bottom: 34px;
+    padding-left: 34px;
 }
 
-.button :hover {
-    border-top-width: 20px;
-    border-right-width: 20px;
-    border-bottom-width: 20px;
-    border-left-width: 20px;
-    border-top-left-radius: 1px;
-    border-top-right-radius: 1px;
-    border-bottom-right-radius: 1px;
-    border-bottom-left-radius: 1px;
-    border-left-color: rgb(232, 209, 24);
-    border-right-color: rgb(232, 209, 24);
-    border-top-color: rgb(232, 209, 24);
-    border-bottom-color: rgb(232, 209, 24);
-    color: rgb(58, 132, 26);
+.button:hover {
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-left-color: rgb(180, 170, 0);
+    border-right-color: rgb(180, 170, 0);
+    border-top-color: rgb(180, 170, 0);
+    border-bottom-color: rgb(180, 170, 0);
+    color: rgb(180, 169, 0);
+    scale: 1.25 1.25;
+    rotate: 1.5deg;
+    opacity: 1;
+}
+
+.button:selected {
 }

@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyleSheet.uss?fileID=7433441132597879392&amp;guid=34ee66c4ab8b5d948b089a0972958ae4&amp;type=3#MainMenuStyleSheet" />
-    <ui:VisualElement name="container" style="flex-grow: 1;">
+    <ui:VisualElement name="container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Videos/New%20Custom%20Render%20Texture.asset?fileID=8600000&amp;guid=0cc192bb82cd90940b601420ab0b4cf0&amp;type=2#New Custom Render Texture&quot;); background-color: rgba(0, 0, 0, 0); -unity-background-scale-mode: stretch-to-fill;">
         <ui:Label tabindex="-1" text="Get Chroma&apos;d!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" class="header" style="margin-top: 50px; -unity-text-align: upper-center; -unity-font-style: bold; font-size: 174%;" />
-        <ui:VisualElement name="buttons" style="min-height: 29%; max-height: 907%; max-width: initial; align-items: stretch; align-self: center; justify-content: flex-start; min-width: 50%; margin-top: 39px; padding-bottom: 0; font-size: 70%; -unity-font-style: normal;">
+        <ui:VisualElement name="buttons" style="min-height: 23%; max-height: 919%; max-width: initial; align-items: stretch; align-self: center; justify-content: flex-start; min-width: 22%; margin-top: 40px; padding-bottom: 0; font-size: 70%; -unity-font-style: normal; padding-top: 0; margin-bottom: 0;">
             <ui:Button text="Setup Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setup-game-button" class="button" />
             <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quit-button" class="button" />
         </ui:VisualElement>
