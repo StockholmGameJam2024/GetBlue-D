@@ -96,11 +96,11 @@ public class CommittedDirectionSpringPlayerController : MonoBehaviour
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
         lineRenderer.positionCount = 2;
-        var lineVector = Vector3.zero;
-        lineVector.x += _tension.x * 0.2f;
-        lineVector.y += _tension.y * 0.2f;
-        lineRenderer.SetPosition(0, Vector3.zero);
-        lineRenderer.SetPosition(0, lineVector);
+        // var lineVector = Vector3.zero;
+        // lineVector.x += _tension.x * 0.2f;
+        // lineVector.y += _tension.y * 0.2f;
+        lineRenderer.SetPosition(0, _rbody.position);
+        lineRenderer.SetPosition(1, _rbody.position + (_tension * 0.2f));
     }
 
     void OnSpring()
