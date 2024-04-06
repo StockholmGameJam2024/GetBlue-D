@@ -20,7 +20,7 @@ public class PlayerSpawner : MonoBehaviour
             players[i].CurrentColor = colors[i];
             Color.RGBToHSV(colors[i], out var hue, out var s, out var v);
             players[i].targetColor = Color.HSVToRGB((hue + 0.5f) % 1f, s, v);
-            playerTargetColor[i] 
+            //playerTargetColor[i] 
         }
     }
 }
