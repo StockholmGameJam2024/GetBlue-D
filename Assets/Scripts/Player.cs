@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public interface IColorable
 {
@@ -51,6 +53,17 @@ public class Player : MonoBehaviour, IColorable, IScorer
     public float Score
     {
         get => _score;
-        set => _score = value;
+        set
+        {
+            _score = value;
+            hud.GetComponent<TMP_Text>().text = value.ToString("0000");
+        }
     }
+
+    public void SetHUD(Image playerHuD)
+    {
+        this.hud = playerHuD;
+    }
+
+    public Image hud { get; set; }
 }
