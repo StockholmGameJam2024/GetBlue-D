@@ -1973,6 +1973,11 @@ MonoBehaviour:
   - {fileID: 1538550743}
   - {fileID: 187581398}
   - {fileID: 11239016}
+  playerHUDs:
+  - {fileID: 41329418}
+  - {fileID: 122663721}
+  - {fileID: 2138089727}
+  - {fileID: 561243821}
 --- !u!1 &794033250
 GameObject:
   m_ObjectHideFlags: 0
