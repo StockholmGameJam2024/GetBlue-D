@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public interface IColorable
@@ -9,14 +10,21 @@ public interface IColorable
     Color CurrentColor{get;set;}
 }
 
-public class Player : MonoBehaviour, IColorable
+public interface IScorer
+{
+    float Score { get; set; }
+}
+
+public class Player : MonoBehaviour, IColorable, IScorer
 {
 
     [FormerlySerializedAs("colorChanger")] public PlayerSpawner spawner;
 
     Color _currentColor;
     public Color targetColor;
+    private float _score;
 
+    public UnityEvent<float> ScoreChange;
     public Color CurrentColor
     {
         get => _currentColor;
@@ -38,6 +46,11 @@ public class Player : MonoBehaviour, IColorable
         _currentColor = HueHelper.MoveHueTowards(_currentColor, newColor, colorStrength);
         GetComponent<SpriteRenderer>().color = _currentColor;
     }
-    
-    
+
+
+    public float Score
+    {
+        get => _score;
+        set => _score = value;
+    }
 }
