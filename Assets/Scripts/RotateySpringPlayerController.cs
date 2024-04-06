@@ -33,51 +33,21 @@ public class RotateySpringPlayerController : MonoBehaviour
 
     /**
      * Right: 0
-     * Bottom: -1/2 PI
-     * Left: PI
      * Top: 1/2 PI
+     * Left PI
+     * Bottom: 3/2 PI
      */
-    private double vecToAngle(Vector2 vector)
+    private static double VecToAngle(Vector2 vector)
     {
-        var isLeft = vector.x < 0;
-        if (vector.x != 0)
-        {
-            var angle = Math.Atan(vector.y / Math.Abs(vector.x));
-            return angle switch
-            {
-                > 0 when isLeft => angle + Math.PI / 2,
-                < 0 when isLeft => angle - Math.PI / 2,
-                _ => angle,
-            };
-
-        }
-        if (vector.y < 0)
-        {
-            return -Math.PI / 2;
-        }
-        return Math.PI / 2;
+        return Math.Atan2(vector.y, vector.x);
     }
     
-    private Vector2 angleToVec(double angle)
+    private static Vector2 AngleToVec(double angle)
     {
-        var isLeft = false;
-        if (Math.Abs(angle) > Math.PI / 2)
-        {
-            isLeft = true;
-            if (angle > 0)
-            {
-                angle -= Math.PI / 2;
-            }
-            else
-            {
-                angle += Math.PI / 2;
-            }
-        }
-        return new Vector2
-        {
-            x = (float)Math.Cos(angle) * (isLeft ? -1 : 1),
-            y = (float)Math.Sin(angle),
-        };
+        return new Vector2(
+            (float)Math.Cos(angle),
+            (float)Math.Sin(angle)
+        );
     }
 
     private void FixedUpdate()
@@ -88,7 +58,7 @@ public class RotateySpringPlayerController : MonoBehaviour
         inputMagnitude -= 0.5;
 
         // If the analog stick is not accelerating, then re-use the last angle
-        double inputAngle = vecToAngle(inputMagnitude < 0 ? _tension : _moveInput);
+        double inputAngle = VecToAngle(inputMagnitude < 0 ? _tension : _moveInput);
         var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
         
         inputMagnitude *= inputAcceleration;
@@ -104,7 +74,7 @@ public class RotateySpringPlayerController : MonoBehaviour
         }
         currentMagnitude = Math.Max(currentMagnitude + inputMagnitude, 0);
 
-        _tension = angleToVec(inputAngle) * (float)currentMagnitude;
+        _tension = AngleToVec(inputAngle) * (float)currentMagnitude;
 
         var color = Color.red;
         color.a = 1f;
@@ -122,9 +92,9 @@ public class RotateySpringPlayerController : MonoBehaviour
     void OnSpring()
     {
         var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
-        var currentAngle = vecToAngle(_tension);
+        var currentAngle = VecToAngle(_tension);
         var accelerationMagnitude = Math.Pow(currentMagnitude, 2) / 10; // The longer you hold down, the even bigger payoff. Exponential.
-        var acceleration = angleToVec(currentAngle) * (float)accelerationMagnitude;
+        var acceleration = AngleToVec(currentAngle) * (float)accelerationMagnitude;
         
         _rbody.velocity += acceleration;
         _tension = new Vector2();
