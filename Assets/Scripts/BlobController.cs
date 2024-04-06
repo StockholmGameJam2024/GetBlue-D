@@ -1,9 +1,20 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BlobController : MonoBehaviour
 {
     public Vector2 destination; 
     private float moveSpeed;
+    /// <summary>
+    /// Depending on the colorStrength, the hue is changed faster.
+    /// e.g. 0.15 = 0.15 hue change from current player color to this blob's color
+    /// </summary>
+    public float colorStrength = 0.05f;
+
+    
+    public SpriteRenderer blobSpriteRenderer;
 
     private void Start()
     {
@@ -27,9 +38,9 @@ public class BlobController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.TryGetComponent(out IColorable colorable))
         {
-            other.GetComponent<ColorComponent>();
+            colorable.ChangeColorTint(this.blobSpriteRenderer.color, colorStrength);
             ReturnToPool();
         }
     }
