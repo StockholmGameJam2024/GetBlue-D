@@ -90,6 +90,17 @@
                     "action": "Spring",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c58d1c01-c7fc-4fc6-8324-a9838ff1cecd",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spring",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
