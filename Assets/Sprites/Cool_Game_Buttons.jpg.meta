@@ -138,6 +138,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Cool_Game_Buttons_2
+      rect:
+        serializedVersion: 2
+        x: 2201
+        y: 2192
+        width: 1679
+        height: 597
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebb7b257b7a9a804da30b528ce069fd1
+      internalID: 1745256936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -151,6 +172,8 @@ TextureImporter:
     nameFileIdTable:
       Cool_Game_Buttons_0: 1594424990
       Cool_Game_Buttons_1: -1143017533
+      Cool_Game_Buttons_2: 1745256936
+      Cool_Game_Buttons_3: -984221577
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
