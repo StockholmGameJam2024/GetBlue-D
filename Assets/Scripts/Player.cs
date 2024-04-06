@@ -56,7 +56,7 @@ public class Player : MonoBehaviour, IColorable, IScorer
         set
         {
             _score = value;
-            hud.GetComponent<TMP_Text>().text = value.ToString("0000");
+            hud.GetComponentInChildren<TMP_Text>().text = value.ToString("0000");
         }
     }
 
