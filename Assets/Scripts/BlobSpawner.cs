@@ -9,10 +9,15 @@ public class BlobSpawner : MonoBehaviour
     private List<GameObject> blobPool;
     private bool gameOver = false;
     private float nextSpawnTime;
+
+    private Color[] colors;
+    public int colorCount;
+    
     
     [SerializeField] private int spawnInterval;
     private void Start()
     {
+        colors = HueHelper.GenerateEvenlyDistributedColors(colorCount);
         InitializeObjectPool();
     }
 
@@ -44,6 +49,7 @@ public class BlobSpawner : MonoBehaviour
             if (!blob.activeInHierarchy)
             {
                 blob.SetActive(true);
+                blob.GetComponent<SpriteRenderer>().color = GetRandomColor(colors);
                 return blob;
             }
         }
@@ -57,9 +63,6 @@ public class BlobSpawner : MonoBehaviour
     { 
         spawnInterval = Random.Range(1, 3);
         // random colour also
-
-        float xSpawn = 0f;
-        float ySpawn = 0f;
 
         var camera = Camera.main;
         float maxY = -camera.orthographicSize;
@@ -94,6 +97,12 @@ public class BlobSpawner : MonoBehaviour
         {
             Debug.LogError("BlobController component not found on the spawned blob.");
         }
+    }
+
+    private Color GetRandomColor(Color[] colors)
+    {
+        int random = Random.Range(0, colorCount);
+        return colors[random];
     }
 }
 

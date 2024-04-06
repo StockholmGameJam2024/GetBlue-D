@@ -1,0 +1,59 @@
+#custom-slider Label {
+    -unity-font: url("project://database/Assets/TextMesh%20Pro/Fonts/GoodDog%20Plain.ttf?fileID=12800000&guid=dc72703a377d244b39cf4bd75493532d&type=3#GoodDog Plain");
+    -unity-font-definition: initial;
+    color: rgb(187, 187, 187);
+    display: none;
+}
+
+#custom-slider #unity-tracker {
+    top: 0;
+    flex-grow: 1;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    background-color: rgb(0, 50, 224);
+    position: relative;
+}
+
+#custom-slider #unity-drag-container {
+    background-color: rgba(255, 54, 54, 0.89);
+    margin-top: 25px;
+    margin-right: 40px;
+    margin-bottom: 25px;
+    margin-left: 40px;
+}
+
+#custom-slider #unity-dragger {
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 20px;
+    height: 100%;
+    top: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    background-color: rgb(184, 123, 0);
+}
+
+#custom-slider #unity-dragger-border {
+}

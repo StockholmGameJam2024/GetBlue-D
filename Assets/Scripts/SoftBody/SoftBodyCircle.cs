@@ -10,6 +10,8 @@ namespace SoftBody
         public GameObject nodePrefab;
         public List<GameObject> points;
         public Mesh mesh;
+        public GooglyEye googlyEyePrefab;
+        private GooglyEye[] googlyEyes = new GooglyEye[2];
 
         [ContextMenu("GenerateCircleMesh")]
         public void GenerateCircleMesh()
@@ -48,7 +50,7 @@ namespace SoftBody
             {
                 float angle = (float)(i - 1) / vertexCount * Mathf.PI * 2f;
                 vertices[i] = new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0f);
-                uv[i] = new Vector2((vertices[i].x / (radius * 2)) + 0.5f, (vertices[i].y / (radius * 2)) + 0.5f);
+                uv[i] = new Vector2(vertices[i].x / (radius * 2) + 0.5f, vertices[i].y / (radius * 2) + 0.5f);
                 
                 // Calculate normals
                 normals[i] = Vector3.up;
@@ -89,6 +91,12 @@ namespace SoftBody
                 points.Add(childObject);
                 childObject.GetComponent<CircleCollider2D>().offset = vertices[i].normalized * -childObject.GetComponent<CircleCollider2D>().radius;
             }
+            googlyEyes[0] = Instantiate(googlyEyePrefab, points[0].transform);
+            googlyEyes[0].transform.localPosition = new Vector3(-0.3f * radius, 0.3f * radius, 0f);
+            googlyEyes[0].transform.localScale = new Vector3(radius * 0.3f, radius * 0.3f, 1f);
+            googlyEyes[1] = Instantiate(googlyEyePrefab, points[0].transform);
+            googlyEyes[1].transform.localPosition = new Vector3(-0.3f * radius, -0.3f * radius, 0f);
+            googlyEyes[1].transform.localScale = new Vector3(radius * 0.3f, radius * 0.3f, 1f);
 
             for (int i = 0; i < points.Count; i++)
             {

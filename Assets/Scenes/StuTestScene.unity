@@ -431,6 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blobPrefab: {fileID: 8646192781394867707, guid: c8cbc3b06939a0f47b6c7bde45f7df98, type: 3}
   poolSize: 20
+  colorCount: 8
   spawnInterval: 5
 --- !u!1 &1453981757
 GameObject:

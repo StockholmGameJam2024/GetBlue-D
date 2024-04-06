@@ -567,9 +567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2109afc4294e15d46b3addb26ac26090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTension: 0
-  tensionAcceleration: 5
-  tensionFrictionDeceleration: 0.2
+  maxTension: 30
+  inputAcceleration: 1
   lineRenderer: {fileID: 799989616}
 --- !u!50 &1842935717
 Rigidbody2D:
