@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 1794355239415104205}
   - component: {fileID: 4264433512483244733}
   - component: {fileID: 3006685663989694462}
+  - component: {fileID: 1975462078617775452}
   m_Layer: 0
   m_Name: SpringMovementPlayer
   m_TagString: Untagged
@@ -333,3 +334,20 @@ MonoBehaviour:
   minimumRotationPerFrame: 0.4
   maximumRotationPerFrame: 180
   lineRenderer: {fileID: 2463316709791776010}
+--- !u!114 &1975462078617775452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6487880110510632022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f14b2429f13514d896d29f964d0a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
+  targetColor: {r: 0, g: 0, b: 0, a: 0}
+  ScoreChange:
+    m_PersistentCalls:
+      m_Calls: []
