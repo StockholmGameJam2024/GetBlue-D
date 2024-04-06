@@ -21,6 +21,8 @@ namespace SoftBody
 
         public Vector3[] vertices;
         public int[] triangles;
+        public Vector2[] uv;
+        public Vector3[] normals;
 
         /// <summary>
         /// Generates a 2D Circle Mesh based on the parameters specified in the component fields.
@@ -33,15 +35,25 @@ namespace SoftBody
 
             vertices = new Vector3[vertexCount + 1];
             triangles = new int[vertexCount * 3];
+            uv = new Vector2[vertexCount + 1];
+            normals = new Vector3[vertexCount + 1];
 
             // Center vertex
             vertices[0] = Vector3.zero;
+            uv[0] = new Vector2(0.5f, 0.5f);
+            normals[0] = Vector3.up;
 
             // Generate vertices in a circle
             for (int i = 1; i <= vertexCount; i++)
             {
                 float angle = (float)(i - 1) / vertexCount * Mathf.PI * 2f;
                 vertices[i] = new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0f);
+                uv[i] = new Vector2((vertices[i].x / (radius * 2)) + 0.5f, (vertices[i].y / (radius * 2)) + 0.5f);
+                
+                // Calculate normals
+                normals[i] = Vector3.up;
+                //float normalAngle = angle + Mathf.PI / 3f; // Rotate by 60 degrees
+                //normals[i] = new Vector3(Mathf.Cos(normalAngle), Mathf.Sin(normalAngle), 0f).normalized;
             }
 
             // Generate triangles
@@ -54,8 +66,10 @@ namespace SoftBody
 
             mesh.vertices = vertices;
             mesh.triangles = triangles;
+            mesh.uv = uv;
+            mesh.normals = normals;
 
-            mesh.RecalculateNormals();
+            //mesh.RecalculateNormals();
 
             return mesh;
         }
