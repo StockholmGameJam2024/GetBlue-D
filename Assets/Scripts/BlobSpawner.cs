@@ -64,9 +64,6 @@ public class BlobSpawner : MonoBehaviour
         spawnInterval = Random.Range(1, 3);
         // random colour also
 
-        float xSpawn = 0f;
-        float ySpawn = 0f;
-
         var camera = Camera.main;
         float maxY = -camera.orthographicSize;
         float aspectRatio = (float)Screen.currentResolution.width / Screen.currentResolution.height;

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerSpawner : MonoBehaviour
@@ -8,7 +7,7 @@ public class PlayerSpawner : MonoBehaviour
     public int playerNumber = 4;
     public Player playerPrefab;
     public Transform[] spawnPositions;
-    public Image[] playerHUDs;
+    public Image[] playerTargetColor;
     
     // Start is called before the first frame update
     void Start()
@@ -21,7 +20,7 @@ public class PlayerSpawner : MonoBehaviour
             players[i].CurrentColor = colors[i];
             Color.RGBToHSV(colors[i], out var hue, out var s, out var v);
             players[i].targetColor = Color.HSVToRGB((hue + 0.5f) % 1f, s, v);
-            playerHUDs[i].color = players[i].targetColor;
+            //playerTargetColor[i] 
         }
     }
 }
