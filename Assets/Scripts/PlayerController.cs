@@ -93,8 +93,9 @@ public class PlayerController : MonoBehaviour
         lineRenderer.SetPosition(0, lineVector);
     }
 
-    void OnSpring()
+    public void OnSpring()
     {
+        Debug.Log("Spring");
         var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
         var currentAngle = resolveAngle(_tension, out var isLeft);
         var accelerationMagnitude = Math.Pow(currentMagnitude, 2) / 10; // The longer you hold down, the even bigger payoff. Exponential.
