@@ -3,17 +3,18 @@ using UnityEngine;
 public class BlobController : MonoBehaviour
 {
     private Rigidbody2D _rbigidbody2D;
+    private bool gameOver = false;
 
-    [SerializeField] private float movementForce = 100f;
+    [SerializeField] private float movementForce;
     [SerializeField] private int spawnInterval; // Frequency of Spawn
 
     private void Start()
     {
         _rbigidbody2D = GetComponent<Rigidbody2D>();
-        if (_rbigidbody2D == null)
-        {
-            Debug.LogError("Rigidbody2D component is missing on the GameObject!");
-        }
+        
+        if (_rbigidbody2D == null) Debug.LogError("Rigidbody2D component is missing on the GameObject!");
+
+        while (!gameOver) BlobSpawn();
     }
 
     private void BlobSpawn()
@@ -40,6 +41,8 @@ public class BlobController : MonoBehaviour
 
     private void MoveTo(Vector2 spawnPoint)
     {
+        movementForce = Random.Range(50f, 100f);
+        
         float oppositeX = -spawnPoint.x;
         float oppositeY = -spawnPoint.y;
 
@@ -47,5 +50,7 @@ public class BlobController : MonoBehaviour
 
         transform.position = Vector2.MoveTowards(transform.position, moveToPosition, movementForce * Time.deltaTime);
     }
+    
+    // Destroy blob after certain time? on collision?
 
 }
