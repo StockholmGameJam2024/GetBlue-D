@@ -2,12 +2,14 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class RotateySpringPlayerController : MonoBehaviour
+public class CommittedDirectionSpringPlayerController : MonoBehaviour
 {
     [SerializeField]
     private float maxTension;
     [SerializeField]
-    private float inputAcceleration;
+    private float minimumRotationPerFrame;
+    [SerializeField]
+    private float maximumRotationPerFrame;
     private Vector2 _tension;
     private InputMaster _playerActions;
     private Rigidbody2D _rbody;
@@ -57,11 +59,11 @@ public class RotateySpringPlayerController : MonoBehaviour
         // Scale the analog stick so that if less than halfway out, then decelerate (in a scaled way)
         inputMagnitude -= 0.5;
 
-        // If the analog stick is not accelerating, then re-use the last angle
-        double inputAngle = VecToAngle(inputMagnitude < 0 ? _tension : _moveInput);
+        double tensionAngle = VecToAngle(_tension);
+        double inputAngle = VecToAngle(_moveInput);
+        
         var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
         
-        inputMagnitude *= inputAcceleration;
         if (inputMagnitude > 0)
         {
             // The closer to the "maximum tension", the slower tension should charge
@@ -70,11 +72,23 @@ public class RotateySpringPlayerController : MonoBehaviour
         else
         {
             // Decelerate tension faster than you accelerate it
-            inputMagnitude *= 2;
+            inputMagnitude *= 6;
         }
         currentMagnitude = Math.Max(currentMagnitude + inputMagnitude, 0);
 
-        _tension = AngleToVec(inputAngle) * (float)currentMagnitude;
+        if (inputMagnitude > 0)
+        {
+            // Rotate a bit according to current input, but decrease "control-ability" according to how much tension there is
+            var tensionAngleDegrees = tensionAngle * Mathf.Rad2Deg;
+            var inputAngleDegrees = inputAngle * Mathf.Rad2Deg;
+            
+            var maxDelta = (maximumRotationPerFrame - minimumRotationPerFrame) * (1 - Math.Pow(currentMagnitude / maxTension, 0.1)) + minimumRotationPerFrame;
+            
+            var newTensionAngleDegrees = Mathf.MoveTowardsAngle((float)tensionAngleDegrees, (float) inputAngleDegrees, (float)maxDelta);
+            tensionAngle = newTensionAngleDegrees * Mathf.Deg2Rad;
+        }
+        
+        _tension = AngleToVec(tensionAngle) * (float)currentMagnitude;
 
         var color = Color.red;
         color.a = 1f;

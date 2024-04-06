@@ -447,10 +447,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1842935714}
   - component: {fileID: 1842935713}
-  - component: {fileID: 1842935715}
   - component: {fileID: 1842935712}
   - component: {fileID: 1842935717}
   - component: {fileID: 1842935718}
+  - component: {fileID: 1842935719}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -555,21 +555,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1842935715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842935711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2109afc4294e15d46b3addb26ac26090, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxTension: 30
-  inputAcceleration: 1
-  lineRenderer: {fileID: 799989616}
 --- !u!50 &1842935717
 Rigidbody2D:
   serializedVersion: 4
@@ -632,6 +617,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1842935719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842935711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a01a3f6753487893e9978d971d523e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTension: 30
+  minimumRotationPerFrame: 0.4
+  maximumRotationPerFrame: 180
+  lineRenderer: {fileID: 799989616}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
