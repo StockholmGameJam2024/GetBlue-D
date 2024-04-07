@@ -1,5 +1,72 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2119703414979113449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5121746821478843682}
+  - component: {fileID: 6258560908925952033}
+  m_Layer: 7
+  m_Name: PlayerPlayerCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5121746821478843682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119703414979113449}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3418977002442468516}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &6258560908925952033
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119703414979113449}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!1 &3426989825953715469
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +242,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2716459375939002743}
+  - {fileID: 5121746821478843682}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5964990022417270050
@@ -302,16 +370,16 @@ MonoBehaviour:
   maxPitch: 1.1
   playerHitSounds:
   - {fileID: 8300000, guid: 310b9972b6a1bd4409e6c93659c3b9a8, type: 3}
+  - {fileID: 8300000, guid: 310b9972b6a1bd4409e6c93659c3b9a8, type: 3}
   - {fileID: 8300000, guid: b83cbb4001263594c90e6e1b7ee9e4bd, type: 3}
-  - {fileID: 8300000, guid: 38c971a3400881943b3b203cbd11fcf2, type: 3}
   wallHitSounds:
   - {fileID: 8300000, guid: 88b91a020bd1d9d448854c7f557d6b3f, type: 3}
   - {fileID: 8300000, guid: 9f1bc8323f61aab478e1e041361f96e3, type: 3}
   - {fileID: 8300000, guid: 80a17abd239617b4f8de0edada4e0330, type: 3}
   blobHitSounds:
-  - {fileID: 8300000, guid: 141dffe12b31b6f48befa312cabc3e77, type: 3}
-  - {fileID: 8300000, guid: 0e79ae9bf6edc8c448438020bc7ab9c9, type: 3}
-  - {fileID: 8300000, guid: 08e7ab824f37f494fa4c77a9a3d76830, type: 3}
+  - {fileID: 8300000, guid: 1d96e6bade9451c47b85a3f04ae052d8, type: 3}
+  - {fileID: 8300000, guid: 4533134fad78f694281b38f37ce574c2, type: 3}
+  - {fileID: 8300000, guid: 1467eaaeb11f2614697bc3eddef021ea, type: 3}
   ScoreChange:
     m_PersistentCalls:
       m_Calls: []
@@ -585,7 +653,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8566ddbc8266c4a34895b53fe60e3f06, type: 2}
+  - {fileID: 2100000, guid: 8cc270c7553a64230afdc205f71c59cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
