@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CommittedDirectionSpringPlayerController : MonoBehaviour
@@ -11,26 +12,16 @@ public class CommittedDirectionSpringPlayerController : MonoBehaviour
     [SerializeField]
     private float maximumRotationPerFrame;
     private Vector2 _tension;
-    private InputMaster _playerActions;
+    private PlayerInput _playerInput;
     private Rigidbody2D _rbody;
     private Vector2 _moveInput;
     public LineRenderer lineRenderer;
 
     void Awake()
     {
-        _playerActions = new InputMaster();
+        _playerInput = GetComponent<PlayerInput>();
         _rbody = GetComponent<Rigidbody2D>();
         _tension = new Vector2();
-    }
-
-    private void OnEnable()
-    {
-        _playerActions.Enable();
-    }
-    
-    private void OnDisable()
-    {
-        _playerActions.Disable();
     }
 
     /**
@@ -54,7 +45,7 @@ public class CommittedDirectionSpringPlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _moveInput = _playerActions.Player_Map.Movement.ReadValue<Vector2>();
+        _moveInput = _playerInput.actions["Movement"].ReadValue<Vector2>();
         var inputMagnitude = Math.Sqrt(Math.Pow(_moveInput.x, 2) + Math.Pow(_moveInput.y, 2));
         // Scale the analog stick so that if less than halfway out, then decelerate (in a scaled way)
         inputMagnitude -= 0.5;
@@ -103,7 +94,7 @@ public class CommittedDirectionSpringPlayerController : MonoBehaviour
     {
         var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
         var currentAngle = VecToAngle(_tension);
-        var accelerationMagnitude = Math.Pow(currentMagnitude, 2) / 10; // The longer you hold down, the even bigger payoff. Exponential.
+        var accelerationMagnitude = Math.Pow(currentMagnitude, 4) / (maxTension * 200); // The longer you hold down, the even bigger payoff. Exponential.
         var acceleration = AngleToVec(currentAngle) * (float)accelerationMagnitude;
         
         _rbody.velocity += acceleration;
