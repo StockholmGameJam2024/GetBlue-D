@@ -32,6 +32,7 @@ public class PlayerSpawner : MonoBehaviour
             FindObjectOfType<GameScoreController>().StartGame();
         }
         FindObjectOfType<GameScoreController>().RegisterPlayer(players[i]);
+        FindObjectOfType<PlayerHudController>().RegisterPlayer(players[i]);
     }
 
     public void OnPlayerLeft(PlayerInput playerInput)
