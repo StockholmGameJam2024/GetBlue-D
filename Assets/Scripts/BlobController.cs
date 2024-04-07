@@ -41,6 +41,8 @@ public class BlobController : MonoBehaviour
         if (other.TryGetComponent(out IColorable colorable))
         {
             colorable.ChangeColorTint(this.blobSpriteRenderer.color, colorStrength);
+            //Play blob death sound here.
+            //It would require an AudioSource component on the blob prefab, a reference to the audio clip and then loading the audio clip in the audio source and .Play();
             ReturnToPool();
         }
     }
