@@ -7,12 +7,10 @@ public static class HueHelper
     public static Color[] GenerateEvenlyDistributedColors(int count)
     {
         Color[] colors = new Color[count];
-        float randomFloat = Random.Range(0.0f, 1f / count);
-        float hueRandom = (float)Math.Round(randomFloat, 3);
-        colors[0] = Color.HSVToRGB(hueRandom, 1, 1);
-        for (int i = 1; i < count; i++)
+        float randomHue = Random.Range(0, 1f);
+        for (int i = 0; i < count; i++)
         {
-            colors[i] = Color.HSVToRGB(hueRandom + (float)i / count, 1, 1);
+            colors[i] = Color.HSVToRGB((randomHue + (float)i / count)%1f, 1, 1);
         }
 
         return colors;
