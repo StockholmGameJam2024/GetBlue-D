@@ -31,10 +31,9 @@ public class AudioSettings : ScriptableObject
   public AudioClip menuMusic;
   [Tooltip("Part of the music, but only meant to be played when starting the game")]
   public AudioClip startGameIntroAudio;
-  public AudioClip gameMusic;
+  public List<AudioClip> gameMusic;
   public AudioClip creditsMusic;
   
-
 
   public void ActivateLowPassFilter()
   {
