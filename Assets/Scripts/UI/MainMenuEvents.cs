@@ -7,6 +7,10 @@ using UnityEngine.UIElements;
 
 public class MainMenuEvents : MonoBehaviour
 {
+    public AudioSettings audioSettings;
+    public AudioSource uiSoundPlayer;
+    public AudioSource musicPlayer;
+    
     UIDocument uiDocument;
     private Button startGameButton;
     private Button quitButton;
@@ -18,15 +22,14 @@ public class MainMenuEvents : MonoBehaviour
     private Toggle player4Toggle;
 
     private List<Button> buttons;
-
-    public AudioClip startGameAudio;
-    public AudioClip selectAudio;
-    public AudioClip hoverAudio;
     
-    private AudioSource audioSource;
-    void Awake(){
+    private Slider masterVolumeSlider;
+    private Label masterVolumeLabel;
+
+    
+    
+    void Start(){
         uiDocument = GetComponent<UIDocument>();
-        audioSource = GetComponent<AudioSource>();
         
         startGameButton = uiDocument.rootVisualElement.Q<Button>("start-game-button");
         creditsButton = uiDocument.rootVisualElement.Q<Button>("credits-button");
@@ -39,6 +42,9 @@ public class MainMenuEvents : MonoBehaviour
         
         buttons = uiDocument.rootVisualElement.Query<Button>().ToList();
         
+        masterVolumeSlider = uiDocument.rootVisualElement.Q<Slider>("master-volume-slider");
+        masterVolumeLabel = uiDocument.rootVisualElement.Q<Label>("master-volume-label");
+        
         startGameButton.RegisterCallback<ClickEvent>(OnStartGameButtonClicked);
         creditsButton.RegisterCallback<ClickEvent>(OnCreditsButtonClicked);
         quitButton.RegisterCallback<ClickEvent>(OnQuitButtonClicked);
@@ -50,14 +56,22 @@ public class MainMenuEvents : MonoBehaviour
             buttons[i].RegisterCallback<ClickEvent>(OnAnyButtonClicked);
         }
         
+        masterVolumeSlider.RegisterCallback<ChangeEvent<float>>(OnMasterVolumeSliderChanged);
         
-        startGameButton.Focus();
-        
+        masterVolumeSlider.value = audioSettings.masterVolume; //-80 to make the slider start at 0. Mixer values will be -80 to 0.
+        masterVolumeLabel.text = $"{audioSettings.GetVolumeToDisplay()}";
+        audioSettings.SetMixerVolume();
+
+        StartMenuMusic();
     }
+
+    
+
 
     private void OnDisable()
     {
         startGameButton.UnregisterCallback<ClickEvent>(OnStartGameButtonClicked);
+        creditsButton.UnregisterCallback<ClickEvent>(OnCreditsButtonClicked);
         quitButton.UnregisterCallback<ClickEvent>(OnQuitButtonClicked);
         for(int i = 0; i < buttons.Count; i++){
             buttons[i].UnregisterCallback<MouseOverEvent>(OnAllButtonsHovered);
@@ -66,13 +80,44 @@ public class MainMenuEvents : MonoBehaviour
             }
             buttons[i].UnregisterCallback<ClickEvent>(OnAnyButtonClicked);
         }
+        masterVolumeSlider.UnregisterCallback<ChangeEvent<float>>(OnMasterVolumeSliderChanged);
     }
     
     private void OnStartGameButtonClicked<TEventType>(TEventType evt) where TEventType : EventBase<TEventType>, new()
     {
         Debug.Log("Setup Game Button Clicked");
-        audioSource.clip = startGameAudio;
-        audioSource.Play();
+        uiSoundPlayer.clip = audioSettings.startGameButtonAudio;
+        uiSoundPlayer.Play();
+
+        StartCoroutine(nameof(ActivateGameMusic));
+    }
+    
+    private IEnumerator ActivateMenuMusic()
+    {
+
+        if (audioSettings.introMenuMusic != null)
+        {
+            musicPlayer.clip = audioSettings.introMenuMusic;
+            musicPlayer.Play();
+            musicPlayer.loop = false;
+            yield return new WaitForSeconds(audioSettings.introMenuMusic.length-0.5f);
+        }
+        musicPlayer.clip = audioSettings.menuMusic;
+        musicPlayer.loop = true;
+        musicPlayer.Play();
+    }
+    private IEnumerator ActivateGameMusic()
+    {
+        if(audioSettings.startGameIntroAudio != null){
+            musicPlayer.clip = audioSettings.startGameIntroAudio;
+            musicPlayer.Play();
+            musicPlayer.loop = false;
+            yield return new WaitForSeconds(audioSettings.startGameIntroAudio.length);
+        }
+       
+        musicPlayer.clip = audioSettings.gameMusic;
+        musicPlayer.loop = true;
+        musicPlayer.Play();
     }
     
     private void OnCreditsButtonClicked(ClickEvent evt)
@@ -90,16 +135,40 @@ public class MainMenuEvents : MonoBehaviour
     
     private void OnAllButtonsHovered(MouseOverEvent evt)
     {
-        audioSource.clip = hoverAudio;
-        audioSource.Play();
+        uiSoundPlayer.clip = audioSettings.hoverButtonAudio;
+        uiSoundPlayer.Play();
     }
 
     private void OnAnyButtonClicked<TEventType>(TEventType evt) where TEventType : EventBase<TEventType>, new()
     {
         Debug.Log("Any Button Clicked");
-        audioSource.clip = selectAudio;
-        audioSource.Play();
+        uiSoundPlayer.clip = audioSettings.clickedButtonAudio;
+        uiSoundPlayer.Play();
     }
     
-   
+    private void OnMasterVolumeSliderChanged(ChangeEvent<float> evt)
+    {
+        audioSettings.SetMasterVolume(evt.newValue);
+        masterVolumeLabel.text = $"{audioSettings.GetVolumeToDisplay()}";
+    }
+    
+    private void StartMenuMusic()
+    {
+        StartCoroutine(ActivateMenuMusic());
+    }
+    [ContextMenu("Pause Game")]
+    public void PauseGame()
+    {
+        audioSettings.ActivateLowPassFilter();
+        uiDocument.enabled = true;
+        var playGameButton = uiDocument.rootVisualElement.Q<Button>("play-game-button");
+        playGameButton.text = "Resume Game";
+    }
+
+    [ContextMenu("Unpause Game")]
+    public void UnpauseGame()
+    {
+        audioSettings.DeactivateLowPassFilter();
+        uiDocument.enabled = true;
+    }
 }

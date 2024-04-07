@@ -13,7 +13,8 @@
         <ui:Instance template="CustomToggle" name="player3-toggle" style="position: absolute; top: 950px; left: 1140px; scale: 4 4;" />
         <ui:Instance template="CustomToggle" name="player4-toggle" style="position: absolute; top: 950px; left: 1260px; scale: 4 4;" />
     </ui:VisualElement>
-    <ui:Slider high-value="100" name="volume-slider" inverted="false" class="slider" style="position: absolute; top: 369px; left: 1581px; scale: 4 4; width: 113px; color: rgb(187, 187, 187); flex-direction: row; -unity-text-align: middle-right; display: flex;" />
-    <ui:Label tabindex="-1" text="Volume" parse-escape-sequences="true" display-tooltip-when-elided="true" name="volume-text" class="normalText" style="position: absolute; top: 201px; left: 1526px; display: flex;" />
+    <ui:Slider high-value="1" name="master-volume-slider" inverted="false" low-value="0.0001" class="slider" style="position: absolute; top: 386px; left: 1608px; scale: 4 4; width: 113px; color: rgb(187, 187, 187); flex-direction: row; -unity-text-align: middle-right; display: flex;" />
+    <ui:Label tabindex="-1" text="Volume" parse-escape-sequences="true" display-tooltip-when-elided="true" name="volume-header" class="normalText" style="position: absolute; top: 201px; left: 1526px; display: flex;" />
     <ui:Label tabindex="-1" text="Press X To Join!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="join-text" class="normalText" style="position: absolute; top: 777px; left: 824px; display: flex;" />
+    <ui:Label tabindex="-1" text="50" parse-escape-sequences="true" display-tooltip-when-elided="true" name="master-volume-label" class="normalText" style="position: absolute; top: 367px; left: 1353px; display: flex; font-size: 55px; -unity-font-style: bold;" />
 </ui:UXML>
