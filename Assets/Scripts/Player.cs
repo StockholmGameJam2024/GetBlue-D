@@ -43,6 +43,7 @@ public class Player : MonoBehaviour, IColorable, IScorer
 
     private Color _currentColor;
     private float _score;
+    private float _scoreRate;
     private AudioSource _audioSource;
 
 
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour, IColorable, IScorer
         element.SetCurrentColor(_currentColor);
         element.SetTargetColor(targetColor);
         element.SetScore(_score);
+        element.SetScoreRate(_scoreRate);
     }
 
     public Color CurrentColor
@@ -111,7 +113,6 @@ public class Player : MonoBehaviour, IColorable, IScorer
         CurrentColor = HueHelper.MoveHueTowards(_currentColor, newColor, colorStrength);
     }
 
-
     public float Score
     {
         get => _score;
@@ -128,6 +129,16 @@ public class Player : MonoBehaviour, IColorable, IScorer
     }
 
     public Image hud { get; set; }
+
+    public float ScoreRate
+    {
+        get => _scoreRate;
+        set
+        {
+            _scoreRate = value;
+            this._newHud?.SetScoreRate(value);
+        }
+    }
 
     public void OnCollisionEnter2D(Collision2D other)
     {
