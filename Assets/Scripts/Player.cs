@@ -23,17 +23,21 @@ public class Player : MonoBehaviour, IColorable, IScorer
 
     [FormerlySerializedAs("colorChanger")] public PlayerSpawner spawner;
     
-    private AudioSource _audioSource;
+    public float minPitch = 0.9f;
+    public float maxPitch = 1.1f;
     
     public List<AudioClip> playerHitSounds;
     public List<AudioClip> wallHitSounds;
     public List<AudioClip> blobHitSounds;
-
-    Color _currentColor;
-    public Color targetColor;
-    private float _score;
-
+    
     public UnityEvent<float> ScoreChange;
+    public Color targetColor;
+    
+    private Color _currentColor;
+    private float _score;
+    private AudioSource _audioSource;
+    
+   
     public Color CurrentColor
     {
         get => _currentColor;
@@ -87,7 +91,7 @@ public class Player : MonoBehaviour, IColorable, IScorer
                 Debug.LogWarning("No player hit sounds found",this);
                 return;
             }
-            _audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            _audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
             _audioSource.PlayOneShot(playerHitSounds[UnityEngine.Random.Range(0, playerHitSounds.Count)]);
             
         }
@@ -98,7 +102,7 @@ public class Player : MonoBehaviour, IColorable, IScorer
                 Debug.LogWarning("No wall hit sounds found",this);
                 return;
             }
-            _audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            _audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
             _audioSource.PlayOneShot(wallHitSounds[UnityEngine.Random.Range(0, wallHitSounds.Count)]);
         }
         else if(other.transform.CompareTag("Blob"))
@@ -108,7 +112,7 @@ public class Player : MonoBehaviour, IColorable, IScorer
                 Debug.LogWarning("No blob hit sounds found",this);
                 return;
             }
-            _audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            _audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
             _audioSource.PlayOneShot(blobHitSounds[UnityEngine.Random.Range(0, blobHitSounds.Count)]);
         }
     }
