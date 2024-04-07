@@ -819,6 +819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d1320e64888534d9345c7e61b108a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endCreditText: {fileID: 1814950510}
   _scrollSpeed: 30
   musicPlayer: {fileID: 1404898992}
   audioSettings: {fileID: 11400000, guid: a59ddeb4afcd14143b4cd419d7e1f5f5, type: 2}
