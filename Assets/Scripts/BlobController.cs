@@ -7,19 +7,21 @@ public class BlobController : MonoBehaviour
 {
     public Vector2 destination; 
     private float moveSpeed;
-    /// <summary>
-    /// Depending on the colorStrength, the hue is changed faster.
-    /// e.g. 0.15 = 0.15 hue change from current player color to this blob's color
-    /// </summary>
     public float colorStrength = 0.05f;
-
-    
     public SpriteRenderer blobSpriteRenderer;
 
     private void Start()
     {
+        // Randomly select scale between 1 and 2
+        float randomScale = Random.Range(1f, 2f);
+        transform.localScale = new Vector3(randomScale, randomScale, 1f);
+
+        // Adjust colorStrength based on scale increase
+        colorStrength *= randomScale;
+
         moveSpeed = Random.Range(1f, 5f);
     }
+
     private void Update()
     {
         MoveTowardsDestination();
