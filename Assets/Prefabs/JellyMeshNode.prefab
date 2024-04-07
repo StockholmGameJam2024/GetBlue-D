@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4886497420695441870}
   - component: {fileID: -3808607275681832196}
   - component: {fileID: 3999996693404117631}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: JellyMeshNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,4 +120,4 @@ HingeJoint2D:
   m_UseLimits: 1
   m_AngleLimits:
     m_LowerAngle: 0
-    m_UpperAngle: 15
+    m_UpperAngle: 12

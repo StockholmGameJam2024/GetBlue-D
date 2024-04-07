@@ -44,7 +44,10 @@ public class Player : MonoBehaviour, IColorable, IScorer
         set
         {
             _currentColor = value;
-            GetComponent<SpriteRenderer>().color = value;
+            if(TryGetComponent(out SpriteRenderer spriteRenderer))
+                spriteRenderer.color = value;
+            if(TryGetComponent(out MeshRenderer meshRenderer))
+                meshRenderer.material.color = value;
         }
     }
 
@@ -60,8 +63,7 @@ public class Player : MonoBehaviour, IColorable, IScorer
 
     public void ChangeColorTint(Color newColor, float colorStrength)
     {
-        _currentColor = HueHelper.MoveHueTowards(_currentColor, newColor, colorStrength);
-        GetComponent<SpriteRenderer>().color = _currentColor;
+        CurrentColor = HueHelper.MoveHueTowards(_currentColor, newColor, colorStrength);
     }
 
 

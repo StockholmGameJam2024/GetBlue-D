@@ -81,6 +81,7 @@ namespace SoftBody
         /// </summary>
         void Start()
         {
+            GenerateCircleMesh();
             mesh = GetComponent<MeshFilter>().mesh;
             var vertices = mesh.vertices;
             points = new List<GameObject>();
@@ -90,6 +91,7 @@ namespace SoftBody
                 childObject.transform.parent = gameObject.transform;
                 points.Add(childObject);
                 childObject.GetComponent<CircleCollider2D>().offset = vertices[i].normalized * -childObject.GetComponent<CircleCollider2D>().radius;
+                childObject.GetComponent<Rigidbody2D>().gravityScale = GetComponent<Rigidbody2D>().gravityScale;
             }
             googlyEyes[0] = Instantiate(googlyEyePrefab, points[0].transform);
             googlyEyes[0].transform.localPosition = new Vector3(-0.3f * radius, 0.3f * radius, 0f);
@@ -106,7 +108,7 @@ namespace SoftBody
                     points[i].GetComponent<HingeJoint2D>().connectedBody = points[i + 1].GetComponent<Rigidbody2D>();
             }
 
-            SecureCenterBody(3);
+            SecureCenterBody(vertexCount/2);
         }
 
         /// <summary>
@@ -117,11 +119,12 @@ namespace SoftBody
         {
             for (int i = 0; i < anchorCount; i++)
             {
-                var firstDistanceJoint = gameObject.AddComponent<DistanceJoint2D>();
+                var firstDistanceJoint = gameObject.AddComponent<SpringJoint2D>();
                 firstDistanceJoint.connectedBody = points[points.Count*i/anchorCount].GetComponent<Rigidbody2D>();
-                firstDistanceJoint.maxDistanceOnly = true;
+                //firstDistanceJoint.di = true;
+                firstDistanceJoint.dampingRatio = 0.9f;
                 firstDistanceJoint.autoConfigureDistance = false;
-                firstDistanceJoint.distance = Vector2.Distance(transform.position, points[points.Count*i/anchorCount].transform.position) * 1.5f;
+                firstDistanceJoint.distance = Vector2.Distance(transform.position, points[points.Count*i/anchorCount].transform.position) * 1.0f;
             }   
         }
 
