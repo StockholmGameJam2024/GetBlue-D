@@ -83,7 +83,7 @@
                 {
                     "name": "",
                     "id": "c53468cd-5cf6-404e-812f-a48919e62621",
-                    "path": "<XInputController>/buttonSouth",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -111,7 +111,7 @@
             "bindingGroup": "Merry Christmas Xbox",
             "devices": [
                 {
-                    "devicePath": "<XInputController>",
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }
