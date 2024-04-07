@@ -18,9 +18,9 @@ MonoBehaviour:
   maxLowPassCutoffFrequency: 22000
   audioMixer: {fileID: 24100000, guid: b69a25ada2d32a742b3f80b8c7dcb2ef, type: 2}
   sfxMixer: {fileID: 24100000, guid: 2bc7c42e640fad7488f77d33f0c6b234, type: 2}
-  startGameButtonAudio: {fileID: 8300000, guid: 8eca35bbae108394badabe895c1aed56, type: 3}
-  clickedButtonAudio: {fileID: 8300000, guid: c765ebcdcf6aa1744b3adaa3b31d5f45, type: 3}
-  hoverButtonAudio: {fileID: 8300000, guid: ac17a9aa5afd1cd43931f0a56a0728ce, type: 3}
+  startGameButtonAudio: {fileID: 8300000, guid: 62a61241b33e3564c98176ea84693002, type: 3}
+  clickedButtonAudio: {fileID: 8300000, guid: 72559c575020b6e4b84455431b3e9b71, type: 3}
+  hoverButtonAudio: {fileID: 8300000, guid: 8dec8e6a3d97ef74091ecfbbaf943a75, type: 3}
   introMenuMusic: {fileID: 8300000, guid: 80251de79cea8c14c817359ead442169, type: 3}
   menuMusic: {fileID: 8300000, guid: 64e909067901a314e8327bba74303049, type: 3}
   startGameIntroAudio: {fileID: 0}
