@@ -490,36 +490,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-    The Star Wars opening crawl is a signature device of the opening
-    sequences of every numbered film of the Star Wars series, an American epic space
-    opera franchise created by George Lucas. Within a black sky background featuring
-    a smattering of stars, the crawl is preceded both by the opening static blue
-    text, "A long time ago in a galaxy far, far away...." and by the Star Wars logo
-    which recedes toward a central point on the screen before disappearing. The crawl
-    text, which describes the backstory and context of the film, then recedes toward
-    a higher point in relation to the screen and with an apparent effect of disappearing
-    in the distance. The visuals are accompanied by the "Main Title Theme", composed
-    by John Williams.
-
-    
-
-    This sequence has featured at the beginning of
-    each of the main Star Wars saga theatrical films produced by Lucasfilm. Although
-    it has retained the same basic elements, the opening crawl has significantly
-    evolved throughout the series.[further explanation needed] It is one of the most
-    immediately recognizable elements of the franchise and has been frequently parodied.
-
-    
-
-    The
-    opening crawl was not used in the animated film Star Wars: The Clone Wars or
-    in the Star Wars "Anthology" films, Rogue One and Solo, although all three films
-    begin with the opening text. Additionally, the opening sequence of Solo continues
-    with a short backstory presented in the same style as the opening text, while
-    The Clone Wars uses a narrator to provide exposition in a similar style to a
-    newsreel.'
+  m_text: "Project Leader:\nMitchell Hentges\nOliver K\xE4llerfors\n\n\nAudio:\nValdemar
+    Delding\nJan-Peter Itze\r\nHamoon Tehrani\n\nGame Programmers:\nMandel Cohen\nStewart
+    Wan\nMarc Zaku\nBranko Zikic\n\n\nThanks for playing."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -546,8 +519,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -784,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d1320e64888534d9345c7e61b108a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scrollSpeed: 20
+  _scrollSpeed: 30
 --- !u!114 &1814950512
 MonoBehaviour:
   m_ObjectHideFlags: 0
