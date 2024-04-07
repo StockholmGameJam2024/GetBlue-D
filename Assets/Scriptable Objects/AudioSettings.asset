@@ -23,3 +23,4 @@ MonoBehaviour:
   menuMusic: {fileID: 8300000, guid: 64e909067901a314e8327bba74303049, type: 3}
   startGameIntroAudio: {fileID: 0}
   gameMusic: {fileID: 0}
+  creditsMusic: {fileID: 8300000, guid: 64e909067901a314e8327bba74303049, type: 3}

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class MainMenuEvents : MonoBehaviour
@@ -129,6 +130,7 @@ public class MainMenuEvents : MonoBehaviour
     {
         Debug.Log("Credits Button Clicked");
         //Activate Credits here
+        SceneManager.LoadScene("EndCreditsScene");
        // throw new NotImplementedException();
     }
     
