@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
             .Where(it => it != this)
             .OrderBy(it => Vector3.Distance(it.transform.position, this.transform.position))
             .FirstOrDefault();
-        if (Vector3.Distance(closestPlayer.transform.position, this.transform.position) < 2f)
+        if (Vector3.Distance(closestPlayer.transform.position, this.transform.position) < 5f)
         {
             var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
             var currentAngle = VecToAngle(_tension);
