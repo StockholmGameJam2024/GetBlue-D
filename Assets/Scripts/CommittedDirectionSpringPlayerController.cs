@@ -92,20 +92,15 @@ public class CommittedDirectionSpringPlayerController : MonoBehaviour
 
         var color = Color.red;
         color.a = 1f;
-        lineRenderer.transform.position = _rbody.position;
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
         lineRenderer.positionCount = 2;
-        // var lineVector = Vector3.zero;
-        // lineVector.x += _tension.x * 0.2f;
-        // lineVector.y += _tension.y * 0.2f;
         lineRenderer.SetPosition(0, _rbody.position);
-        lineRenderer.SetPosition(1, _rbody.position + (_tension * 0.2f));
+        lineRenderer.SetPosition(1, _rbody.position + _tension * 0.2f);
     }
 
     public void OnSpring()
     {
-        Debug.Log("Spring");
         var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
         var currentAngle = VecToAngle(_tension);
         var accelerationMagnitude = Math.Pow(currentMagnitude, 2) / 10; // The longer you hold down, the even bigger payoff. Exponential.
