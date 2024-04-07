@@ -1,21 +1,25 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EndCreditUI : MonoBehaviour
 {
+    public GameObject endCreditText;
+
     [SerializeField] private float _scrollSpeed = 20f;
     [SerializeField] private AudioSource musicPlayer;
     [SerializeField] private AudioSettings audioSettings;
 
+    private bool hasReachedEnd = false;
+
     private void Update()
     {
         transform.Translate(Camera.main.transform.up * (_scrollSpeed * Time.deltaTime));
-        
-        //Somewhere detect input, or when the credits are done, call the following method
-        //ReturnToMainGame();
+
+        if (!hasReachedEnd && endCreditText.transform.position.y >= 1050f)
+        {
+            hasReachedEnd = true;
+            ReturnToMainScene();
+        }
     }
 
     private void Awake()
@@ -23,9 +27,10 @@ public class EndCreditUI : MonoBehaviour
         musicPlayer.clip = audioSettings.creditsMusic;
         musicPlayer.Play();
     }
-    [ContextMenu( "Return to Main Scene")]
+
     private void ReturnToMainScene()
     {
         SceneManager.LoadScene("MainScene");
     }
 }
+
