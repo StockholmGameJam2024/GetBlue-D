@@ -5,15 +5,24 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-
+[RequireComponent(typeof(AudioSource))]
 public class GameScoreController : MonoBehaviour
 {
     public AnimationCurve scoreCurve;
     public float targetScore;
     public UnityEvent<Player> PlayerWin;
     [SerializeField] bool started;
+    public AudioSettings audioSettings;
     
+    AudioSource audioSource;
     List<Player> players = new();
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.loop = false;
+        audioSource.playOnAwake = false;
+    }
 
     public void RegisterPlayer(Player player)
     {
@@ -46,6 +55,7 @@ public class GameScoreController : MonoBehaviour
         if (winner != null)
         {
             PlayerWin.Invoke(winner);
+            audioSource.PlayOneShot(audioSettings.winAudio);
             enabled = false;
         }
     }

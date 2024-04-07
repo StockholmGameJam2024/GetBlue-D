@@ -20,10 +20,9 @@ public class AudioSettings : ScriptableObject
   
   //One shot audio clips
   public AudioClip startGameButtonAudio;
-  
-  
   public AudioClip clickedButtonAudio;
   public AudioClip hoverButtonAudio;
+  public AudioClip winAudio;
   
   //Music audio clips
  
