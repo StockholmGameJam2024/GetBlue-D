@@ -62,7 +62,6 @@ public class BlobSpawner : MonoBehaviour
     private void BlobSpawn()
     { 
         spawnInterval = Random.Range(1, 3);
-        // random colour also
 
         var camera = Camera.main;
         float maxY = -camera.orthographicSize;
