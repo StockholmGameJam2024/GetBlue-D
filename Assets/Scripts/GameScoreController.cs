@@ -57,6 +57,21 @@ public class GameScoreController : MonoBehaviour
             PlayerWin.Invoke(winner);
             audioSource.PlayOneShot(audioSettings.winAudio);
             enabled = false;
+            var winscreen = GameObject.Find("winscreen").GetComponent<Winscreen>();
+            GameObject.Find("InGameUI").transform.localScale = Vector2.zero;
+            winscreen.Show();
+            
+            foreach (Player player in players)
+            {
+                if (player != winner)
+                {
+                    player.transform.localScale = Vector2.zero;
+                    var movement = player.GetComponent<PlayerMovement>();
+                    movement.Disable();
+                }
+            }
+
+            winner.transform.position = new Vector2(-5, -2);
         }
     }
 

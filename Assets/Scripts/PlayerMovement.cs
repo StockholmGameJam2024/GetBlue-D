@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class CommittedDirectionSpringPlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     private float maxTension;
@@ -16,12 +16,20 @@ public class CommittedDirectionSpringPlayerController : MonoBehaviour
     private Rigidbody2D _rbody;
     private Vector2 _moveInput;
     public LineRenderer lineRenderer;
+    private bool disabled = false;
 
     void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
         _rbody = GetComponent<Rigidbody2D>();
         _tension = new Vector2();
+    }
+
+    public void Disable()
+    {
+        disabled = true;
+        lineRenderer.SetPosition(0, _rbody.position);
+        lineRenderer.SetPosition(1, _rbody.position);
     }
 
     /**
@@ -45,6 +53,10 @@ public class CommittedDirectionSpringPlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (disabled)
+        {
+            return;
+        }
         _moveInput = _playerInput.actions["Movement"].ReadValue<Vector2>();
         var inputMagnitude = Math.Sqrt(Math.Pow(_moveInput.x, 2) + Math.Pow(_moveInput.y, 2));
         // Scale the analog stick so that if less than halfway out, then decelerate (in a scaled way)
@@ -92,6 +104,10 @@ public class CommittedDirectionSpringPlayerController : MonoBehaviour
 
     public void OnSpring()
     {
+        if (disabled)
+        {
+            return;
+        }
         var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
         var currentAngle = VecToAngle(_tension);
         var accelerationMagnitude = Math.Pow(currentMagnitude, 4) / (maxTension * 200); // The longer you hold down, the even bigger payoff. Exponential.
