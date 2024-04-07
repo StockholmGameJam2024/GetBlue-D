@@ -17,8 +17,6 @@ public class PlayerHudController : MonoBehaviour
     private void CreatePlayerHud(Player player)
     {
         HudElement element = Instantiate(HUDprefab, parent);
-        element.current.color = player.CurrentColor;
-        element.target.color = player.targetColor;
-        element.score.text = player.Score.ToString();
+        player.SetHUD(element);
     }
 }

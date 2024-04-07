@@ -13,31 +13,48 @@ public interface IColorable
     Color CurrentColor{get;set;}
 }
 
+// spawner registers new player with hud controller
+// hud controller instantiates hud prefab
+// assigns it to player.HUD
+// player, when anythinng changes, e,g. CurrentColor
+// then does: if(hud != null) hud.color = newColor;
+
 public interface IScorer
 {
     float Score { get; set; }
 }
+
 [RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour, IColorable, IScorer
 {
 
     [FormerlySerializedAs("colorChanger")] public PlayerSpawner spawner;
-    
+
     public float minPitch = 0.9f;
     public float maxPitch = 1.1f;
-    
+
     public List<AudioClip> playerHitSounds;
     public List<AudioClip> wallHitSounds;
     public List<AudioClip> blobHitSounds;
-    
+
     public UnityEvent<float> ScoreChange;
     public Color targetColor;
-    
+
     private Color _currentColor;
     private float _score;
     private AudioSource _audioSource;
-    
-   
+
+
+    private HudElement _newHud;
+
+    public void SetHUD(HudElement element)
+    {
+        _newHud = element;
+        element.SetCurrentColor(_currentColor);
+        element.SetTargetColor(targetColor);
+        element.SetScore(_score);
+    }
+
     public Color CurrentColor
     {
         get => _currentColor;
@@ -48,6 +65,7 @@ public class Player : MonoBehaviour, IColorable, IScorer
                 spriteRenderer.color = value;
             if(TryGetComponent(out MeshRenderer meshRenderer))
                 meshRenderer.material.color = value;
+            _newHud?.SetCurrentColor(_currentColor);
         }
     }
 
@@ -73,7 +91,7 @@ public class Player : MonoBehaviour, IColorable, IScorer
         set
         {
             _score = value;
-            hud.GetComponentInChildren<TMP_Text>().text = value.ToString("0000");
+            _newHud?.SetScore(value);
         }
     }
 
