@@ -5,6 +5,7 @@ namespace SoftBody
 {
     public class SoftBodyCircle : MonoBehaviour
     {
+        private static int layerNumber = 1;
         public int vertexCount = 20;
         public float radius = 1f;
         public GameObject nodePrefab;
@@ -88,6 +89,8 @@ namespace SoftBody
             for (int i = 1; i < vertices.Length; i++)
             {
                 GameObject childObject = Instantiate(nodePrefab, gameObject.transform.position + vertices[i], Quaternion.identity);
+                childObject.layer = LayerMask.NameToLayer("SoftBodyNode" + layerNumber++);
+                if (layerNumber == 6) layerNumber = 1;
                 childObject.transform.parent = gameObject.transform;
                 points.Add(childObject);
                 childObject.GetComponent<CircleCollider2D>().offset = vertices[i].normalized * -childObject.GetComponent<CircleCollider2D>().radius;

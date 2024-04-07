@@ -10,15 +10,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - SoftBodyNode
+  - SoftBodyNode1
   - Water
   - UI
   - Player
   - PlayerPlayer
-  - 
-  - 
-  - 
-  - 
+  - SoftBodyNode2
+  - SoftBodyNode3
+  - SoftBodyNode4
+  - SoftBodyNode5
   - 
   - 
   - 

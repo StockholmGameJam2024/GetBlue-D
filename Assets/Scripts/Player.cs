@@ -139,11 +139,13 @@ public class Player : MonoBehaviour, IColorable, IScorer
             this._newHud?.SetScoreRate(value);
         }
     }
-
+    
     public void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.TryGetComponent(out Player player))
+        var player = other.gameObject.GetComponentInParent<Player>() ?? other.gameObject.GetComponentInChildren<Player>();
+        if (player != null)
         {
+            Debug.Log($"Collided with player: {other.gameObject}");
             if(playerHitSounds.Count <= 0)
             {
                 Debug.LogWarning("No player hit sounds found",this);
@@ -152,6 +154,16 @@ public class Player : MonoBehaviour, IColorable, IScorer
             _audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
             _audioSource.PlayOneShot(playerHitSounds[UnityEngine.Random.Range(0, playerHitSounds.Count)]);
             
+            if (other.rigidbody == GetComponent<Rigidbody2D>())
+            {
+                foreach (var rigidBody in gameObject.GetComponentsInChildren<Rigidbody2D>())
+                {
+                    foreach (var contact in other.contacts)
+                    {
+                        //rigidBody.AddForceAtPosition(contact.contact.point, );
+                    }
+                }
+            }
         }
         else if(other.transform.CompareTag("Wall"))
         {
