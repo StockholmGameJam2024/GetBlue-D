@@ -90,6 +90,10 @@ public class MainMenuEvents : MonoBehaviour
         uiSoundPlayer.Play();
 
         StartCoroutine(nameof(ActivateGameMusic));
+        
+        //Activate or instantiate players here
+        
+        uiDocument.enabled = false;
     }
     
     private IEnumerator ActivateMenuMusic()
@@ -100,7 +104,8 @@ public class MainMenuEvents : MonoBehaviour
             musicPlayer.clip = audioSettings.introMenuMusic;
             musicPlayer.Play();
             musicPlayer.loop = false;
-            yield return new WaitForSeconds(audioSettings.introMenuMusic.length-0.5f);
+            //Music has lag between the end and the start of the next clip, either fix the clips or tweak this offset
+            yield return new WaitForSeconds(audioSettings.introMenuMusic.length-1f); 
         }
         musicPlayer.clip = audioSettings.menuMusic;
         musicPlayer.loop = true;

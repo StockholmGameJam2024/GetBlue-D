@@ -16,14 +16,17 @@ public class AudioSettings : ScriptableObject
   
   //One shot audio clips
   public AudioClip startGameButtonAudio;
-  [Tooltip("Part of the music, but only meant to be played when starting the game")]
-  public AudioClip startGameIntroAudio;
-  public AudioClip introMenuMusic;
+  
+  
   public AudioClip clickedButtonAudio;
   public AudioClip hoverButtonAudio;
   
   //Music audio clips
+ 
+  public AudioClip introMenuMusic;
   public AudioClip menuMusic;
+  [Tooltip("Part of the music, but only meant to be played when starting the game")]
+  public AudioClip startGameIntroAudio;
   public AudioClip gameMusic;
   
   
