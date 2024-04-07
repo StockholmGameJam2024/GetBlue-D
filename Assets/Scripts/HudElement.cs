@@ -9,6 +9,7 @@ public class HudElement : MonoBehaviour
     public Image current;
     public Image target;
     public TMP_Text score;
+    public TMP_Text scoreRate;
 
     
     
@@ -25,5 +26,10 @@ public class HudElement : MonoBehaviour
     public void SetScore(float newScore)
     {
         score.text = newScore.ToString("0000");
+    }
+
+    public void SetScoreRate(float newScoreRate)
+    {
+        scoreRate.text = newScoreRate.ToString("00.0%");
     }
 }

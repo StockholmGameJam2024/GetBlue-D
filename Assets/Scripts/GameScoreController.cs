@@ -33,7 +33,8 @@ public class GameScoreController : MonoBehaviour
         }
         foreach (var player in players)
         {
-            player.Score += GetScoreForColor(player.CurrentColor, player.targetColor);
+            player.Score += GetScoreForColor(player.CurrentColor, player.targetColor, out float scoreRate);
+            player.ScoreRate = scoreRate;
         }
 
         var winnerList = from player in players
@@ -49,14 +50,14 @@ public class GameScoreController : MonoBehaviour
         }
     }
 
-    float GetScoreForColor(Color currentColor, Color targetColor)
+    float GetScoreForColor(Color currentColor, Color targetColor, out float scoreRate)
     {
         Color.RGBToHSV(currentColor, out var _currentHue, out _, out _);
         Color.RGBToHSV(targetColor, out var _targetHue, out _, out _);
 
         float hueDistance = MathsExtensions.DistanceBetween01UnClamped(_currentHue, _targetHue);
-        float scoreSample = 1 - 2 * hueDistance;
-        float scoreMultiplier = scoreCurve.Evaluate(scoreSample);
+        scoreRate = 1 - 2 * hueDistance;
+        float scoreMultiplier = scoreCurve.Evaluate(scoreRate);
         return scoreMultiplier;
     }
 }
