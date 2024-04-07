@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336eea191210fe04daed3e859d6abad3, type: 3}
   m_Name: AudioSettings
   m_EditorClassIdentifier: 
-  masterVolume: 1
-  sfxVolume: 0.76
+  masterVolume: 0.0001
+  sfxVolume: 1
   lowPassCutoffFrequency: 5000
   maxLowPassCutoffFrequency: 22000
   audioMixer: {fileID: 24100000, guid: b69a25ada2d32a742b3f80b8c7dcb2ef, type: 2}
@@ -22,7 +22,7 @@ MonoBehaviour:
   clickedButtonAudio: {fileID: 8300000, guid: 72559c575020b6e4b84455431b3e9b71, type: 3}
   hoverButtonAudio: {fileID: 8300000, guid: 8dec8e6a3d97ef74091ecfbbaf943a75, type: 3}
   introMenuMusic: {fileID: 8300000, guid: 80251de79cea8c14c817359ead442169, type: 3}
-  menuMusic: {fileID: 8300000, guid: 64e909067901a314e8327bba74303049, type: 3}
+  menuMusic: {fileID: 8300000, guid: 63b904d488ef544fea160b56b4e1c17b, type: 3}
   startGameIntroAudio: {fileID: 0}
-  gameMusic: {fileID: 8300000, guid: 64e909067901a314e8327bba74303049, type: 3}
-  creditsMusic: {fileID: 8300000, guid: 64e909067901a314e8327bba74303049, type: 3}
+  gameMusic: {fileID: 8300000, guid: a44be1de6158e47fe8017d24701947a1, type: 3}
+  creditsMusic: {fileID: 8300000, guid: 63b904d488ef544fea160b56b4e1c17b, type: 3}

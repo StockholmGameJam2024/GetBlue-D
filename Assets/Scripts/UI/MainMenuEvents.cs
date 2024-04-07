@@ -29,11 +29,12 @@ public class MainMenuEvents : MonoBehaviour
     private Label masterVolumeLabel;
     private Label sfxVolumeLabel;
     
-
+    private PlayerInputManager playerInputManager;
     
     
     void Start()
     {
+        playerInputManager = FindObjectOfType<PlayerInputManager>();
         InitUI();
         StartMenuMusic();
     }
@@ -119,6 +120,7 @@ public class MainMenuEvents : MonoBehaviour
         //Activate or instantiate players here
         
         uiDocument.enabled = false;
+        playerInputManager.EnableJoining();
     }
     
     private IEnumerator ActivateMenuMusic()
