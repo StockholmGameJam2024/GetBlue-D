@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7642246796674924677}
   m_Layer: 0
   m_Name: Blob
-  m_TagString: Untagged
+  m_TagString: Blob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0}
+  colorStrength: 0.05
   blobSpriteRenderer: {fileID: 3382436268159291989}
 --- !u!58 &8436236415196627362
 CircleCollider2D:

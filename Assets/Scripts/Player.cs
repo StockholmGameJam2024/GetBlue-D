@@ -27,6 +27,7 @@ public class Player : MonoBehaviour, IColorable, IScorer
     
     public List<AudioClip> playerHitSounds;
     public List<AudioClip> wallHitSounds;
+    public List<AudioClip> blobHitSounds;
 
     Color _currentColor;
     public Color targetColor;
@@ -81,13 +82,34 @@ public class Player : MonoBehaviour, IColorable, IScorer
     {
         if (other.gameObject.TryGetComponent(out Player player))
         {
-            if(playerHitSounds.Count <= 0) return;
+            if(playerHitSounds.Count <= 0)
+            {
+                Debug.LogWarning("No player hit sounds found",this);
+                return;
+            }
+            _audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
             _audioSource.PlayOneShot(playerHitSounds[UnityEngine.Random.Range(0, playerHitSounds.Count)]);
+            
         }
         else if(other.transform.CompareTag("Wall"))
         {
-            if(wallHitSounds.Count <= 0) return;
+            if(wallHitSounds.Count <= 0)
+            {
+                Debug.LogWarning("No wall hit sounds found",this);
+                return;
+            }
+            _audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
             _audioSource.PlayOneShot(wallHitSounds[UnityEngine.Random.Range(0, wallHitSounds.Count)]);
+        }
+        else if(other.transform.CompareTag("Blob"))
+        {
+            if(blobHitSounds.Count <= 0)
+            {
+                Debug.LogWarning("No blob hit sounds found",this);
+                return;
+            }
+            _audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            _audioSource.PlayOneShot(blobHitSounds[UnityEngine.Random.Range(0, blobHitSounds.Count)]);
         }
     }
 }

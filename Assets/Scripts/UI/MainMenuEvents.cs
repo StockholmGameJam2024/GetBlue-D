@@ -130,7 +130,8 @@ public class MainMenuEvents : MonoBehaviour
             musicPlayer.Play();
             musicPlayer.loop = false;
             //Music has lag between the end and the start of the next clip, either fix the clips or tweak this offset
-            yield return new WaitForSeconds(audioSettings.introMenuMusic.length-1f); 
+            yield return new WaitForSeconds(audioSettings.introMenuMusic.length-0.125f); 
+            musicPlayer.time = 0;
         }
         musicPlayer.clip = audioSettings.menuMusic;
         musicPlayer.loop = true;
