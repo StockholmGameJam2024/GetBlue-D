@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 336eea191210fe04daed3e859d6abad3, type: 3}
+  m_Name: AudioSettings
+  m_EditorClassIdentifier: 
+  masterVolume: 0.643
+  lowPassCutoffFrequency: 5000
+  maxLowPassCutoffFrequency: 22000
+  audioMixer: {fileID: 24100000, guid: b69a25ada2d32a742b3f80b8c7dcb2ef, type: 2}
+  startGameButtonAudio: {fileID: 8300000, guid: 8eca35bbae108394badabe895c1aed56, type: 3}
+  clickedButtonAudio: {fileID: 8300000, guid: c765ebcdcf6aa1744b3adaa3b31d5f45, type: 3}
+  hoverButtonAudio: {fileID: 8300000, guid: ac17a9aa5afd1cd43931f0a56a0728ce, type: 3}
+  introMenuMusic: {fileID: 8300000, guid: 80251de79cea8c14c817359ead442169, type: 3}
+  menuMusic: {fileID: 8300000, guid: 64e909067901a314e8327bba74303049, type: 3}
+  startGameIntroAudio: {fileID: 0}
+  gameMusic: {fileID: 0}
