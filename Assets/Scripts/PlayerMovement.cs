@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -117,6 +118,32 @@ public class PlayerMovement : MonoBehaviour
         {
             _rbody.velocity += acceleration;
         }
+        _tension = new Vector2();
+    }
+
+    public void OnYeet()
+    {
+        if (disabled)
+        {
+            return;
+        }
+        var closestPlayer = FindObjectsOfType<PlayerMovement>()
+            .Where(it => it != this)
+            .OrderBy(it => Vector3.Distance(it.transform.position, this.transform.position))
+            .FirstOrDefault();
+        if (Vector3.Distance(closestPlayer.transform.position, this.transform.position) < 2f)
+        {
+            var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
+            var currentAngle = VecToAngle(_tension);
+            var accelerationMagnitude = Math.Pow(currentMagnitude, 4) / (maxTension * 200); // The longer you hold down, the even bigger payoff. Exponential.
+            var acceleration = AngleToVec(currentAngle) * (float)accelerationMagnitude;
+
+            foreach (var _rbody in closestPlayer.GetComponentsInChildren<Rigidbody2D>())
+            {
+                _rbody.velocity += acceleration;
+            }
+        }
+        
         _tension = new Vector2();
     }
 }
