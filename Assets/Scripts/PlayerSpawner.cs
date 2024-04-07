@@ -1,14 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class PlayerSpawner : MonoBehaviour
 {
     public List<Player> players;
-    public int playerNumber = 4;
-    public Player playerPrefab;
-    public Transform[] spawnPositions;
     private Color[] colors;
 
     // Start is called before the first frame update
