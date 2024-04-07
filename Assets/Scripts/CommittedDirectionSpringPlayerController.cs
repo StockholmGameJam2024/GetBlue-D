@@ -1,17 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class CommittedDirectionSpringPlayerController : MonoBehaviour
 {
     [SerializeField]
     private float maxTension;
     [SerializeField]
-    private float inputAcceleration;
+    private float minimumRotationPerFrame;
+    [SerializeField]
+    private float maximumRotationPerFrame;
     private Vector2 _tension;
     private InputMaster _playerActions;
     private Rigidbody2D _rbody;
@@ -35,18 +33,23 @@ public class PlayerController : MonoBehaviour
         _playerActions.Disable();
     }
 
-    private double resolveAngle(Vector2 vector, out bool isLeft)
+    /**
+     * Right: 0
+     * Top: 1/2 PI
+     * Left PI
+     * Bottom: 3/2 PI
+     */
+    private static double VecToAngle(Vector2 vector)
     {
-        isLeft = vector.x < 0;
-        if (vector.x != 0)
-        {
-            return Math.Atan(vector.y / Math.Abs(vector.x));
-        }
-        if (vector.y < 0)
-        {
-            return -Math.PI / 2;
-        }
-        return Math.PI / 2;
+        return Math.Atan2(vector.y, vector.x);
+    }
+    
+    private static Vector2 AngleToVec(double angle)
+    {
+        return new Vector2(
+            (float)Math.Cos(angle),
+            (float)Math.Sin(angle)
+        );
     }
 
     private void FixedUpdate()
@@ -56,11 +59,11 @@ public class PlayerController : MonoBehaviour
         // Scale the analog stick so that if less than halfway out, then decelerate (in a scaled way)
         inputMagnitude -= 0.5;
 
-        // If the analog stick is not accelerating, then re-use the last angle
-        double inputAngle = resolveAngle(inputMagnitude < 0 ? _tension : _moveInput, out var isInputLeft);
+        double tensionAngle = VecToAngle(_tension);
+        double inputAngle = VecToAngle(_moveInput);
+        
         var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
         
-        inputMagnitude *= inputAcceleration;
         if (inputMagnitude > 0)
         {
             // The closer to the "maximum tension", the slower tension should charge
@@ -69,16 +72,23 @@ public class PlayerController : MonoBehaviour
         else
         {
             // Decelerate tension faster than you accelerate it
-            inputMagnitude *= 2;
+            inputMagnitude *= 6;
         }
         currentMagnitude = Math.Max(currentMagnitude + inputMagnitude, 0);
-        
-        var newTension = new Vector2
+
+        if (inputMagnitude > 0)
         {
-            x = (float)(Math.Cos(inputAngle) * currentMagnitude) * (isInputLeft ? -1 : 1),
-            y = (float)(Math.Sin(inputAngle) * currentMagnitude),
-        };
-        _tension = newTension;
+            // Rotate a bit according to current input, but decrease "control-ability" according to how much tension there is
+            var tensionAngleDegrees = tensionAngle * Mathf.Rad2Deg;
+            var inputAngleDegrees = inputAngle * Mathf.Rad2Deg;
+            
+            var maxDelta = (maximumRotationPerFrame - minimumRotationPerFrame) * (1 - Math.Pow(currentMagnitude / maxTension, 0.1)) + minimumRotationPerFrame;
+            
+            var newTensionAngleDegrees = Mathf.MoveTowardsAngle((float)tensionAngleDegrees, (float) inputAngleDegrees, (float)maxDelta);
+            tensionAngle = newTensionAngleDegrees * Mathf.Deg2Rad;
+        }
+        
+        _tension = AngleToVec(tensionAngle) * (float)currentMagnitude;
 
         var color = Color.red;
         color.a = 1f;
@@ -86,23 +96,20 @@ public class PlayerController : MonoBehaviour
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
         lineRenderer.positionCount = 2;
-        var lineVector = Vector3.zero;
-        lineVector.x += _tension.x * 0.2f;
-        lineVector.y += _tension.y * 0.2f;
-        lineRenderer.SetPosition(0, Vector3.zero);
-        lineRenderer.SetPosition(0, lineVector);
+        // var lineVector = Vector3.zero;
+        // lineVector.x += _tension.x * 0.2f;
+        // lineVector.y += _tension.y * 0.2f;
+        lineRenderer.SetPosition(0, _rbody.position);
+        lineRenderer.SetPosition(1, _rbody.position + (_tension * 0.2f));
     }
 
-    void OnSpring()
+    public void OnSpring()
     {
+        Debug.Log("Spring");
         var currentMagnitude = Math.Sqrt(Math.Pow(_tension.x, 2) + Math.Pow(_tension.y, 2));
-        var currentAngle = resolveAngle(_tension, out var isLeft);
+        var currentAngle = VecToAngle(_tension);
         var accelerationMagnitude = Math.Pow(currentMagnitude, 2) / 10; // The longer you hold down, the even bigger payoff. Exponential.
-        var acceleration = new Vector2
-        {
-            x = (float)(Math.Cos(currentAngle) * accelerationMagnitude) * (isLeft ? -1 : 1),
-            y = (float)(Math.Sin(currentAngle) * accelerationMagnitude),
-        };
+        var acceleration = AngleToVec(currentAngle) * (float)accelerationMagnitude;
         
         _rbody.velocity += acceleration;
         _tension = new Vector2();
