@@ -21,7 +21,7 @@ MonoBehaviour:
   startGameButtonAudio: {fileID: 8300000, guid: 62a61241b33e3564c98176ea84693002, type: 3}
   clickedButtonAudio: {fileID: 8300000, guid: 72559c575020b6e4b84455431b3e9b71, type: 3}
   hoverButtonAudio: {fileID: 8300000, guid: 8dec8e6a3d97ef74091ecfbbaf943a75, type: 3}
-  winAudio: {fileID: 0}
+  winAudio: {fileID: 8300000, guid: 3a545d25455f71d458260d7edb34cf2b, type: 3}
   introMenuMusic: {fileID: 8300000, guid: 80251de79cea8c14c817359ead442169, type: 3}
   menuMusic: {fileID: 8300000, guid: 63b904d488ef544fea160b56b4e1c17b, type: 3}
   startGameIntroAudio: {fileID: 0}

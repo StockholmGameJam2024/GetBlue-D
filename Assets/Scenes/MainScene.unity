@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 24300002, guid: 2bc7c42e640fad7488f77d33f0c6b234, type: 2}
+    - target: {fileID: 1851334815231162677, guid: b526abf928bef7b499e6fcf631caf2f1, type: 3}
+      propertyPath: m_Volume
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 4700310199160876827, guid: b526abf928bef7b499e6fcf631caf2f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -336,14 +340,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
-  playerNumber: 2
-  playerPrefab: {fileID: 1975462078617775452, guid: 0c08bbcefd4504a488547d4604d5bc8c, type: 3}
-  spawnPositions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &784253866
 MonoBehaviour:
   m_ObjectHideFlags: 0
