@@ -9,7 +9,6 @@ public class PlayerSpawner : MonoBehaviour
     public int playerNumber = 4;
     public Player playerPrefab;
     public Transform[] spawnPositions;
-    public Image[] playerHUDs;
     private Color[] colors;
 
     // Start is called before the first frame update
@@ -25,8 +24,6 @@ public class PlayerSpawner : MonoBehaviour
         players[i].CurrentColor = colors[i];
         Color.RGBToHSV(colors[i], out var hue, out var s, out var v);
         players[i].targetColor = Color.HSVToRGB((hue + 0.5f) % 1f, s, v);
-        players[i].SetHUD(playerHUDs[i]);
-        playerHUDs[i].color = players[i].targetColor;
         if (i == 0)
         {
             FindObjectOfType<GameScoreController>().StartGame();

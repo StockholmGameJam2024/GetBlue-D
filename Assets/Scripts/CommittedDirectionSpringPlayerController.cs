@@ -96,8 +96,11 @@ public class CommittedDirectionSpringPlayerController : MonoBehaviour
         var currentAngle = VecToAngle(_tension);
         var accelerationMagnitude = Math.Pow(currentMagnitude, 4) / (maxTension * 200); // The longer you hold down, the even bigger payoff. Exponential.
         var acceleration = AngleToVec(currentAngle) * (float)accelerationMagnitude;
-        
-        _rbody.velocity += acceleration;
+
+        foreach (var _rbody in GetComponentsInChildren<Rigidbody2D>())
+        {
+            _rbody.velocity += acceleration;
+        }
         _tension = new Vector2();
     }
 }
