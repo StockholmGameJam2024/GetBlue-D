@@ -370,16 +370,16 @@ MonoBehaviour:
   maxPitch: 1.1
   playerHitSounds:
   - {fileID: 8300000, guid: 310b9972b6a1bd4409e6c93659c3b9a8, type: 3}
+  - {fileID: 8300000, guid: 310b9972b6a1bd4409e6c93659c3b9a8, type: 3}
   - {fileID: 8300000, guid: b83cbb4001263594c90e6e1b7ee9e4bd, type: 3}
-  - {fileID: 8300000, guid: 38c971a3400881943b3b203cbd11fcf2, type: 3}
   wallHitSounds:
   - {fileID: 8300000, guid: 88b91a020bd1d9d448854c7f557d6b3f, type: 3}
   - {fileID: 8300000, guid: 9f1bc8323f61aab478e1e041361f96e3, type: 3}
   - {fileID: 8300000, guid: 80a17abd239617b4f8de0edada4e0330, type: 3}
   blobHitSounds:
-  - {fileID: 8300000, guid: 141dffe12b31b6f48befa312cabc3e77, type: 3}
-  - {fileID: 8300000, guid: 0e79ae9bf6edc8c448438020bc7ab9c9, type: 3}
-  - {fileID: 8300000, guid: 08e7ab824f37f494fa4c77a9a3d76830, type: 3}
+  - {fileID: 8300000, guid: 1d96e6bade9451c47b85a3f04ae052d8, type: 3}
+  - {fileID: 8300000, guid: 4533134fad78f694281b38f37ce574c2, type: 3}
+  - {fileID: 8300000, guid: 1467eaaeb11f2614697bc3eddef021ea, type: 3}
   ScoreChange:
     m_PersistentCalls:
       m_Calls: []
