@@ -8,11 +8,15 @@ public class AudioSettings : ScriptableObject
 {
   [Tooltip("In Percentage"), Range(0.0001f, 1)]
   public float masterVolume = 1;
+
+  [Tooltip("In Percentage"), Range(0.0001f, 1)]
+  public float sfxVolume = 1;
   [Tooltip("In Percentage")]
   public float lowPassCutoffFrequency = 5000f;
   public float maxLowPassCutoffFrequency = 22000f;
   
   public AudioMixer audioMixer;
+  public AudioMixer sfxMixer;
   
   //One shot audio clips
   public AudioClip startGameButtonAudio;
@@ -30,7 +34,8 @@ public class AudioSettings : ScriptableObject
   public AudioClip gameMusic;
   public AudioClip creditsMusic;
   
-  
+
+
   public void ActivateLowPassFilter()
   {
     //Set the low pass cutoff frequency to 5000 Hz
@@ -57,5 +62,17 @@ public class AudioSettings : ScriptableObject
   public void SetMixerVolume()
   {
     audioMixer.SetFloat("masterVolume",  Mathf.Log10(masterVolume) * 20); // 20 because audio math
+    sfxMixer.SetFloat("sfxVolume", Mathf.Log10(sfxVolume) * 20);
+  }
+
+  public int GetSFXVolumeToDisplay()
+  {
+    return Mathf.RoundToInt(sfxVolume*100);
+  }
+
+  public void SetSFXVolume(float evtNewValue)
+  {
+    sfxVolume = evtNewValue;
+    SetMixerVolume();
   }
 }

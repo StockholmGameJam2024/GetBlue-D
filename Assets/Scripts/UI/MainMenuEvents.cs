@@ -25,11 +25,21 @@ public class MainMenuEvents : MonoBehaviour
     private List<Button> buttons;
     
     private Slider masterVolumeSlider;
+    private Slider sfxVolumeSlider;
     private Label masterVolumeLabel;
+    private Label sfxVolumeLabel;
+    
 
     
     
-    void Start(){
+    void Start()
+    {
+        InitUI();
+        StartMenuMusic();
+    }
+
+    private void InitUI()
+    {
         uiDocument = GetComponent<UIDocument>();
         
         startGameButton = uiDocument.rootVisualElement.Q<Button>("start-game-button");
@@ -44,7 +54,9 @@ public class MainMenuEvents : MonoBehaviour
         buttons = uiDocument.rootVisualElement.Query<Button>().ToList();
         
         masterVolumeSlider = uiDocument.rootVisualElement.Q<Slider>("master-volume-slider");
+        sfxVolumeSlider = uiDocument.rootVisualElement.Q<Slider>("sfx-volume-slider");
         masterVolumeLabel = uiDocument.rootVisualElement.Q<Label>("master-volume-label");
+        sfxVolumeLabel = uiDocument.rootVisualElement.Q<Label>("sfx-volume-label");
         
         startGameButton.RegisterCallback<ClickEvent>(OnStartGameButtonClicked);
         creditsButton.RegisterCallback<ClickEvent>(OnCreditsButtonClicked);
@@ -58,15 +70,26 @@ public class MainMenuEvents : MonoBehaviour
         }
         
         masterVolumeSlider.RegisterCallback<ChangeEvent<float>>(OnMasterVolumeSliderChanged);
+        sfxVolumeSlider.RegisterCallback<ChangeEvent<float>>(OnSFXVolumeSliderChanged);
         
-        masterVolumeSlider.value = audioSettings.masterVolume; //-80 to make the slider start at 0. Mixer values will be -80 to 0.
-        masterVolumeLabel.text = $"{audioSettings.GetVolumeToDisplay()}";
-        audioSettings.SetMixerVolume();
+        SetVolumeSliderValues();
 
-        StartMenuMusic();
     }
 
-    
+    private void SetVolumeSliderValues()
+    {
+        masterVolumeSlider.value = audioSettings.masterVolume; 
+        sfxVolumeSlider.value = audioSettings.sfxVolume;
+        masterVolumeLabel.text = $"{audioSettings.GetVolumeToDisplay()}";
+        sfxVolumeLabel.text = $"{audioSettings.GetSFXVolumeToDisplay()}";
+        audioSettings.SetMixerVolume();
+    }
+
+    private void OnSFXVolumeSliderChanged(ChangeEvent<float> evt)
+    {
+        audioSettings.SetSFXVolume(evt.newValue);
+        sfxVolumeLabel.text = $"{audioSettings.GetSFXVolumeToDisplay()}";
+    }
 
 
     private void OnDisable()
@@ -82,6 +105,7 @@ public class MainMenuEvents : MonoBehaviour
             buttons[i].UnregisterCallback<ClickEvent>(OnAnyButtonClicked);
         }
         masterVolumeSlider.UnregisterCallback<ChangeEvent<float>>(OnMasterVolumeSliderChanged);
+        sfxVolumeSlider.UnregisterCallback<ChangeEvent<float>>(OnSFXVolumeSliderChanged);
     }
     
     private void OnStartGameButtonClicked<TEventType>(TEventType evt) where TEventType : EventBase<TEventType>, new()
@@ -168,8 +192,10 @@ public class MainMenuEvents : MonoBehaviour
     {
         audioSettings.ActivateLowPassFilter();
         uiDocument.enabled = true;
-        var playGameButton = uiDocument.rootVisualElement.Q<Button>("play-game-button");
+        InitUI();
+        var playGameButton = uiDocument.rootVisualElement.Q<Button>("start-game-button");
         playGameButton.text = "Resume Game";
+        
     }
 
     [ContextMenu("Unpause Game")]
