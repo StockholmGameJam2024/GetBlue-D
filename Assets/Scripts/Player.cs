@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public interface IColorable
 {
@@ -51,6 +52,32 @@ public class Player : MonoBehaviour, IColorable, IScorer
     // Start is called before the first frame update
     void Start()
     {
+        // Bounding box in the "middle ish" of the screen where we'll try to spawn the player
+        var topLeft = Camera.main!.ScreenToWorldPoint(Vector2.zero) / 2;
+        var bottomRight = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height)) / 2;
+        var thisCollider = GetComponent<CircleCollider2D>();
+        var i = 0;
+        
+        while (true)
+        {
+            var newPosition = new Vector2(Random.Range(topLeft.x, bottomRight.x), Random.Range(bottomRight.y, topLeft.y));
+            var collisions = Physics.OverlapSphere(newPosition, thisCollider.radius);
+
+            if (collisions.Length == 0)
+            {
+                thisCollider.transform.position = newPosition;
+                break;
+            }
+
+            i++;
+            if (i <= 1000)
+                continue;
+            
+            Debug.LogError("Couldn't find non-colliding area to spawn user");
+            thisCollider.transform.position = newPosition;
+            break;
+        }
+
         spawner = GetComponent<PlayerSpawner>();
         _audioSource = GetComponent<AudioSource>();
         _audioSource.playOnAwake = false;
