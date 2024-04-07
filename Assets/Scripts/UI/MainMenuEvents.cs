@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class MainMenuEvents : MonoBehaviour
 {
@@ -148,7 +149,7 @@ public class MainMenuEvents : MonoBehaviour
             yield return new WaitForSeconds(audioSettings.startGameIntroAudio.length);
         }
        
-        musicPlayer.clip = audioSettings.gameMusic;
+        musicPlayer.clip = audioSettings.gameMusic[Random.Range(0, audioSettings.gameMusic.Count)];
         musicPlayer.loop = true;
         musicPlayer.Play();
     }
