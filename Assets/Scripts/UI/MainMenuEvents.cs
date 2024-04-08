@@ -131,13 +131,10 @@ public class MainMenuEvents : MonoBehaviour
     
     private void OnStartGameButtonClicked<TEventType>(TEventType evt) where TEventType : EventBase<TEventType>, new()
     {
-        Debug.Log("Setup Game Button Clicked");
         uiSoundPlayer.clip = audioSettings.startGameButtonAudio;
         uiSoundPlayer.Play();
 
         StartCoroutine(nameof(ActivateGameMusic));
-        
-        //Activate or instantiate players here
         
         uiDocument.enabled = false;
         playerInputManager.EnableJoining();
@@ -175,10 +172,7 @@ public class MainMenuEvents : MonoBehaviour
     
     private void OnCreditsButtonClicked(ClickEvent evt)
     {
-        Debug.Log("Credits Button Clicked");
-        //Activate Credits here
         SceneManager.LoadScene("EndCreditsScene");
-       // throw new NotImplementedException();
     }
     
     private void OnQuitButtonClicked<TEventType>(TEventType evt) where TEventType : EventBase<TEventType>, new()
@@ -195,7 +189,6 @@ public class MainMenuEvents : MonoBehaviour
 
     private void OnAnyButtonClicked<TEventType>(TEventType evt) where TEventType : EventBase<TEventType>, new()
     {
-        Debug.Log("Any Button Clicked");
         uiSoundPlayer.clip = audioSettings.clickedButtonAudio;
         uiSoundPlayer.Play();
     }

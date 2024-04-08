@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AudioSettings
   m_EditorClassIdentifier: 
   masterVolume: 1
-  musicVolume: 0.1
+  musicVolume: 0.546
   sfxVolume: 0.68
   lowPassCutoffFrequency: 5000
   maxLowPassCutoffFrequency: 22000
