@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,7 +34,22 @@ public class AudioSettings : ScriptableObject
   public AudioClip startGameIntroAudio;
   public List<AudioClip> gameMusic;
   public AudioClip creditsMusic;
-  
+
+
+  private void Awake()
+  {
+    SetMixerVolume("masterVolume",masterVolume);
+    SetMixerVolume("musicVolume",musicVolume);
+    SetMixerVolume("sfxVolume",sfxVolume);
+  }
+
+  private void OnValidate()
+  {
+    SetMixerVolume("masterVolume",masterVolume);
+    SetMixerVolume("musicVolume",musicVolume);
+    SetMixerVolume("sfxVolume",sfxVolume);
+  }
+
 
   public void ActivateLowPassFilter()
   {
