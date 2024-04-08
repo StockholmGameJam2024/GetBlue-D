@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336eea191210fe04daed3e859d6abad3, type: 3}
   m_Name: AudioSettings
   m_EditorClassIdentifier: 
-  masterVolume: 0.45
-  sfxVolume: 1
+  masterVolume: 1
+  musicVolume: 0.1
+  sfxVolume: 0.68
   lowPassCutoffFrequency: 5000
   maxLowPassCutoffFrequency: 22000
-  audioMixer: {fileID: 24100000, guid: b69a25ada2d32a742b3f80b8c7dcb2ef, type: 2}
-  sfxMixer: {fileID: 24100000, guid: 2bc7c42e640fad7488f77d33f0c6b234, type: 2}
+  mainMixer: {fileID: 24100000, guid: b69a25ada2d32a742b3f80b8c7dcb2ef, type: 2}
   startGameButtonAudio: {fileID: 8300000, guid: 62a61241b33e3564c98176ea84693002, type: 3}
   clickedButtonAudio: {fileID: 8300000, guid: 72559c575020b6e4b84455431b3e9b71, type: 3}
   hoverButtonAudio: {fileID: 8300000, guid: 8dec8e6a3d97ef74091ecfbbaf943a75, type: 3}

@@ -6,17 +6,18 @@ using UnityEngine.Audio;
 [CreateAssetMenu(fileName = "AudioSettings", menuName = "Audio Settings")]
 public class AudioSettings : ScriptableObject
 {
-  [Tooltip("In Percentage"), Range(0.0001f, 1)]
-  public float masterVolume = 1;
+  [Tooltip("In Percentage"), Range(0.0001f, 1), SerializeField]
+   float masterVolume = 0.5f, musicVolume = 1, sfxVolume = 1;
+  
+   public float MasterVolume{  get { return masterVolume; }  set { masterVolume = value; SetMixerVolume("masterVolume",masterVolume); } }
+   public float MusicVolume{  get { return musicVolume; }  set { musicVolume = value; SetMixerVolume("musicVolume",musicVolume); } }
+   public float SFXVolume{  get { return sfxVolume; }  set { sfxVolume = value; SetMixerVolume("sfxVolume",sfxVolume); } }
+  
 
-  [Tooltip("In Percentage"), Range(0.0001f, 1)]
-  public float sfxVolume = 1;
-  [Tooltip("In Percentage")]
   public float lowPassCutoffFrequency = 5000f;
   public float maxLowPassCutoffFrequency = 22000f;
   
-  public AudioMixer audioMixer;
-  public AudioMixer sfxMixer;
+  public AudioMixer mainMixer;
   
   //One shot audio clips
   public AudioClip startGameButtonAudio;
@@ -37,40 +38,34 @@ public class AudioSettings : ScriptableObject
   public void ActivateLowPassFilter()
   {
     //Set the low pass cutoff frequency to 5000 Hz
-    audioMixer.SetFloat("mainCutoffFrequency", lowPassCutoffFrequency);
+    mainMixer.SetFloat("masterCutoffFrequency", lowPassCutoffFrequency);
   }
     
   public void DeactivateLowPassFilter()
   {
     //Set the low pass cutoff frequency to 22000 Hz
-    audioMixer.SetFloat("mainCutoffFrequency", maxLowPassCutoffFrequency);
+    mainMixer.SetFloat("masterCutoffFrequency", maxLowPassCutoffFrequency);
   }
   
-  public void SetMasterVolume(float volume)
-  {
-    masterVolume = volume;
-    SetMixerVolume();
-  }
-  
-  public int GetVolumeToDisplay()
+  /// <summary>
+  /// Converts 0-1 volume to 0-100
+  /// </summary>
+  /// <returns></returns>
+  public int GetMasterDisplayValue()
   {
     return Mathf.RoundToInt(masterVolume*100);
   }
-
-  public void SetMixerVolume()
+  public int GetMusicDisplayValue()
   {
-    audioMixer.SetFloat("masterVolume",  Mathf.Log10(masterVolume) * 20); // 20 because audio math
-    sfxMixer.SetFloat("sfxVolume", Mathf.Log10(sfxVolume) * 20);
+    return Mathf.RoundToInt(musicVolume*100);
   }
-
-  public int GetSFXVolumeToDisplay()
+  public int GetSFXDisplayValue()
   {
     return Mathf.RoundToInt(sfxVolume*100);
   }
-
-  public void SetSFXVolume(float evtNewValue)
+  
+  private void SetMixerVolume(string floatName, float volume)
   {
-    sfxVolume = evtNewValue;
-    SetMixerVolume();
+    mainMixer.SetFloat(floatName, Mathf.Log10(volume) * 20);
   }
 }

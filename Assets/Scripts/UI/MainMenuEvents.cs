@@ -25,9 +25,13 @@ public class MainMenuEvents : MonoBehaviour
 
     private List<Button> buttons;
     
+    //--------Sliders--------
     private Slider masterVolumeSlider;
     private Slider sfxVolumeSlider;
+    private Slider musicVolumeSlider;
+    
     private Label masterVolumeLabel;
+    private Label musicVolumeLabel;
     private Label sfxVolumeLabel;
     
     private PlayerInputManager playerInputManager;
@@ -38,6 +42,20 @@ public class MainMenuEvents : MonoBehaviour
         playerInputManager = FindObjectOfType<PlayerInputManager>();
         InitUI();
         StartMenuMusic();
+    }
+    private void OnDisable()
+    {
+        startGameButton.UnregisterCallback<ClickEvent>(OnStartGameButtonClicked);
+        creditsButton.UnregisterCallback<ClickEvent>(OnCreditsButtonClicked);
+        quitButton.UnregisterCallback<ClickEvent>(OnQuitButtonClicked);
+        for(int i = 0; i < buttons.Count; i++){
+            buttons[i].UnregisterCallback<MouseOverEvent>(OnAllButtonsHovered);
+            if( buttons[i] == startGameButton){
+                continue;
+            }
+            buttons[i].UnregisterCallback<ClickEvent>(OnAnyButtonClicked);
+        }
+        UnregisterSlidersCallbacks();
     }
 
     private void InitUI()
@@ -55,14 +73,12 @@ public class MainMenuEvents : MonoBehaviour
         
         buttons = uiDocument.rootVisualElement.Query<Button>().ToList();
         
-        masterVolumeSlider = uiDocument.rootVisualElement.Q<Slider>("master-volume-slider");
-        sfxVolumeSlider = uiDocument.rootVisualElement.Q<Slider>("sfx-volume-slider");
-        masterVolumeLabel = uiDocument.rootVisualElement.Q<Label>("master-volume-label");
-        sfxVolumeLabel = uiDocument.rootVisualElement.Q<Label>("sfx-volume-label");
+        InitSliders();
         
         startGameButton.RegisterCallback<ClickEvent>(OnStartGameButtonClicked);
         creditsButton.RegisterCallback<ClickEvent>(OnCreditsButtonClicked);
         quitButton.RegisterCallback<ClickEvent>(OnQuitButtonClicked);
+        
         for(int i = 0; i < buttons.Count; i++){
             buttons[i].RegisterCallback<MouseOverEvent>(OnAllButtonsHovered);
             if( buttons[i] == startGameButton){
@@ -71,44 +87,47 @@ public class MainMenuEvents : MonoBehaviour
             buttons[i].RegisterCallback<ClickEvent>(OnAnyButtonClicked);
         }
         
-        masterVolumeSlider.RegisterCallback<ChangeEvent<float>>(OnMasterVolumeSliderChanged);
-        sfxVolumeSlider.RegisterCallback<ChangeEvent<float>>(OnSFXVolumeSliderChanged);
-        
-        SetVolumeSliderValues();
-
     }
 
+    #region Sliders
+    private void InitSliders()
+    {
+        masterVolumeSlider = uiDocument.rootVisualElement.Q<Slider>("master-volume-slider");
+        musicVolumeSlider = uiDocument.rootVisualElement.Q<Slider>("music-volume-slider");
+        sfxVolumeSlider = uiDocument.rootVisualElement.Q<Slider>("sfx-volume-slider");
+        
+        masterVolumeLabel = uiDocument.rootVisualElement.Q<Label>("master-volume-label");
+        musicVolumeLabel = uiDocument.rootVisualElement.Q<Label>("music-volume-label");
+        sfxVolumeLabel = uiDocument.rootVisualElement.Q<Label>("sfx-volume-label");
+
+        RegisterSliderCallbacks();
+        SetVolumeSliderValues();
+    }
     private void SetVolumeSliderValues()
     {
-        masterVolumeSlider.value = audioSettings.masterVolume; 
-        sfxVolumeSlider.value = audioSettings.sfxVolume;
-        masterVolumeLabel.text = $"{audioSettings.GetVolumeToDisplay()}";
-        sfxVolumeLabel.text = $"{audioSettings.GetSFXVolumeToDisplay()}";
-        audioSettings.SetMixerVolume();
+        masterVolumeSlider.value = audioSettings.MasterVolume; 
+        musicVolumeSlider.value = audioSettings.MusicVolume;
+        sfxVolumeSlider.value = audioSettings.SFXVolume;
+        
+        masterVolumeLabel.text = $"{audioSettings.GetMasterDisplayValue()}";
+        musicVolumeLabel.text = $"{audioSettings.GetMusicDisplayValue()}";
+        sfxVolumeLabel.text = $"{audioSettings.GetSFXDisplayValue()}";
     }
-
-    private void OnSFXVolumeSliderChanged(ChangeEvent<float> evt)
+    
+    private void RegisterSliderCallbacks()
     {
-        audioSettings.SetSFXVolume(evt.newValue);
-        sfxVolumeLabel.text = $"{audioSettings.GetSFXVolumeToDisplay()}";
+        masterVolumeSlider.RegisterCallback<ChangeEvent<float>>(OnMasterVolumeSliderChanged);
+        musicVolumeSlider.RegisterCallback<ChangeEvent<float>>(OnMusicVolumeSliderChanged);
+        sfxVolumeSlider.RegisterCallback<ChangeEvent<float>>(OnSFXVolumeSliderChanged);
     }
-
-
-    private void OnDisable()
+    private void UnregisterSlidersCallbacks()
     {
-        startGameButton.UnregisterCallback<ClickEvent>(OnStartGameButtonClicked);
-        creditsButton.UnregisterCallback<ClickEvent>(OnCreditsButtonClicked);
-        quitButton.UnregisterCallback<ClickEvent>(OnQuitButtonClicked);
-        for(int i = 0; i < buttons.Count; i++){
-            buttons[i].UnregisterCallback<MouseOverEvent>(OnAllButtonsHovered);
-            if( buttons[i] == startGameButton){
-                continue;
-            }
-            buttons[i].UnregisterCallback<ClickEvent>(OnAnyButtonClicked);
-        }
         masterVolumeSlider.UnregisterCallback<ChangeEvent<float>>(OnMasterVolumeSliderChanged);
+        musicVolumeSlider.UnregisterCallback<ChangeEvent<float>>(OnMusicVolumeSliderChanged);
         sfxVolumeSlider.UnregisterCallback<ChangeEvent<float>>(OnSFXVolumeSliderChanged);
     }
+    
+    #endregion
     
     private void OnStartGameButtonClicked<TEventType>(TEventType evt) where TEventType : EventBase<TEventType>, new()
     {
@@ -183,8 +202,18 @@ public class MainMenuEvents : MonoBehaviour
     
     private void OnMasterVolumeSliderChanged(ChangeEvent<float> evt)
     {
-        audioSettings.SetMasterVolume(evt.newValue);
-        masterVolumeLabel.text = $"{audioSettings.GetVolumeToDisplay()}";
+        audioSettings.MasterVolume = evt.newValue;
+        masterVolumeLabel.text = $"{audioSettings.GetMasterDisplayValue()}";
+    }
+    private void OnMusicVolumeSliderChanged(ChangeEvent<float> evt)
+    {
+        audioSettings.MusicVolume = evt.newValue;
+        musicVolumeLabel.text = $"{audioSettings.GetMusicDisplayValue()}";
+    }
+    private void OnSFXVolumeSliderChanged(ChangeEvent<float> evt)
+    {
+        audioSettings.SFXVolume = evt.newValue;
+        sfxVolumeLabel.text = $"{audioSettings.GetSFXDisplayValue()}";
     }
     
     private void StartMenuMusic()
@@ -199,7 +228,6 @@ public class MainMenuEvents : MonoBehaviour
         InitUI();
         var playGameButton = uiDocument.rootVisualElement.Q<Button>("start-game-button");
         playGameButton.text = "Resume Game";
-        
     }
 
     [ContextMenu("Unpause Game")]
