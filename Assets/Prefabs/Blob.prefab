@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5043522690006902710}
   - component: {fileID: 749218619677087276}
   - component: {fileID: 8436236415196627362}
-  - component: {fileID: 691069032402097997}
   - component: {fileID: 1185225140011475224}
   m_Layer: 0
   m_Name: Blob
@@ -166,22 +165,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
---- !u!114 &691069032402097997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8646192781394867707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2718ae7008e6ef4f8a9752c2da11814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blobPrefab: {fileID: 8646192781394867707}
-  poolSize: 20
-  colorCount: 8
-  spawnInterval: 2
 --- !u!58 &1185225140011475224
 CircleCollider2D:
   m_ObjectHideFlags: 0

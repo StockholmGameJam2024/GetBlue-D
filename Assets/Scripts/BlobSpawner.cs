@@ -44,6 +44,7 @@ public class BlobSpawner : MonoBehaviour
 
     private GameObject GetPooledBlob()
     {
+        Debug.Log("Spawning blob:", this);
         foreach (GameObject blob in blobPool)
         {
             if (!blob.activeInHierarchy)

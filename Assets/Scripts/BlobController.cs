@@ -10,6 +10,11 @@ public class BlobController : MonoBehaviour
     public float colorStrength = 0.05f;
     public SpriteRenderer blobSpriteRenderer;
 
+    private void Awake()
+    {
+        Debug.Log("Blob spawned.");
+    }
+
     private void Start()
     {
         // Randomly select scale between 1 and 2

@@ -565,7 +565,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 6487880110510632022, guid: 0c08bbcefd4504a488547d4604d5bc8c, type: 3}
+  m_PlayerPrefab: {fileID: 6487880110510632022, guid: 0c08bbcefd4504a488548d4604d5bc8c, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -919,7 +919,7 @@ MonoBehaviour:
   blobPrefab: {fileID: 8646192781394867707, guid: c8cbc3b06939a0f47b6c7bde45f7df98, type: 3}
   poolSize: 20
   colorCount: 8
-  spawnInterval: 2
+  spawnInterval: 10
 --- !u!4 &1461619149
 Transform:
   m_ObjectHideFlags: 0
