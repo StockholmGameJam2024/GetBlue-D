@@ -1,0 +1,8 @@
+.normalText {
+    -unity-font: url("project://database/Assets/TextMesh%20Pro/Fonts/GoodDog%20Plain.ttf?fileID=12800000&guid=dc72703a377d244b39cf4bd75493532d&type=3#GoodDog Plain");
+    -unity-font-definition: initial;
+    color: rgb(187, 187, 187);
+    font-size: 108px;
+    -unity-text-outline-width: 3px;
+    -unity-text-outline-color: rgb(42, 42, 42);
+}

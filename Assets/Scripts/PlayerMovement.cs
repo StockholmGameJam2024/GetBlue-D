@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        _moveInput = _playerInput.actions["Movement"].ReadValue<Vector2>();
+        _moveInput = _playerInput.actions["Move"].ReadValue<Vector2>();
         var inputMagnitude = Math.Sqrt(Math.Pow(_moveInput.x, 2) + Math.Pow(_moveInput.y, 2));
         // Scale the analog stick so that if less than halfway out, then decelerate (in a scaled way)
         inputMagnitude -= 0.5;

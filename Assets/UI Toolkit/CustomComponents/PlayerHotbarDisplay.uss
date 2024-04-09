@@ -1,0 +1,7 @@
+.normalText > .playerHotbarText {
+    font-size: 46px;
+}
+
+.playerHotbarText {
+    font-size: 32px;
+}

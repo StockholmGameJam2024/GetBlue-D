@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<engine:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:engine="UnityEngine.UIElements"
-    xmlns:editor="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
->
-    
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="container" style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 0; min-height: 10%; flex-wrap: nowrap; align-self: auto; align-items: center; flex-direction: row; justify-content: flex-start;">
+            <ui:GroupBox style="background-color: rgb(188, 73, 73); flex-grow: 1; flex-shrink: 1; width: 20%; height: 100%; max-width: 50%;" />
+            <ui:GroupBox style="background-color: rgb(188, 73, 73); flex-grow: 1; flex-shrink: 1; width: 20%; height: 100%; max-width: 50%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
