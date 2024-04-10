@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.partisanprogrammer.extended-attributes": {
+      "version": "https://github.com/PartisanProgrammer/Extended-Attributes.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "b490fcf91d0ea6ecfae26b55bf66f244916e65ee"
+    },
     "com.unity.2d.animation": {
       "version": "9.1.0",
       "depth": 1,
